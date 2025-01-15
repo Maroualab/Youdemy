@@ -1,7 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
 
-
 <head>
 	<meta charset="utf-8">
 
@@ -12,22 +11,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!--====== Favicon Icon ======-->
-	<link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+	<link rel="shortcut icon" href="../assets/images/favicon.png" type="image/png">
 
 	<!--====== Animate CSS ======-->
-	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" href="../assets/css/animate.css">
 
 	<!--====== Line Icons CSS ======-->
-	<link rel="stylesheet" href="assets/css/LineIcons.2.0.css">
+	<link rel="stylesheet" href="../assets/css/LineIcons.2.0.css">
 
 	<!--====== Bootstrap CSS ======-->
-	<link rel="stylesheet" href="assets/css/bootstrap-5.0.5-alpha.min.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap-5.0.5-alpha.min.css">
 
 	<!--====== Style CSS ======-->
-	<link rel="stylesheet" href="assets/css/style.css">
-
-<link href="./src/output.css" rel="stylesheet">
-
+	<link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
 
@@ -66,7 +62,7 @@
 					<div class="col-xl-12">
 						<nav class="navbar navbar-expand-lg">
 							<a class="navbar-brand" href="index.html">
-								<img id="logo" src="assets/images/logo.svg" alt="Logo">
+								<img id="logo" src="../assets/images/logo.svg" alt="Logo">
 							</a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 								aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,8 +87,9 @@
 									<li class="nav-item">
 										<a class="page-scroll" href="#contact">Contact</a>
 									</li>
-									<li class="nav-item">
-										<a class="header-btn btn-hover" href="#courses">Get Started</a>
+									<li class="nav-item" style="display:flex;gap:10px;">
+										<a class="header-btn btn-hover" href="/website/app/Views/auth/login.php">signIn</a>
+										<a class="header-btn btn-hover" href="/website/app/Views/auth/sign-up.php">signUp</a>
 									</li>
 								</ul>
 							</div> <!-- navbar collapse -->
@@ -121,8 +118,8 @@
 			</div>
 		</div>
 		<div class="hero-left">
-			<img src="assets/images/hero-img.png" alt="">
-			<img src="assets/images/dot-shape.svg" alt="" class="shape">
+			<img src="../assets/images/hero-img.png" alt="">
+			<img src="../assets/images/dot-shape.svg" alt="" class="shape">
 		</div>
 	</section>
 	<!--====== HERO PART END ======-->
@@ -197,7 +194,7 @@
 					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
 						<div class="course-img">
 							<a href="course-single.html">
-								<img src="assets/images/course/full-stack.jpg" alt="">
+								<img src="../assets/images/course/full-stack.jpg" alt="">
 							</a>
 						</div>
 						<div class="course-info">
@@ -226,7 +223,7 @@
 					<div class="single-course wow fadeInUp" data-wow-delay=".4s">
 						<div class="course-img">
 							<a href="course-single.html">
-								<img src="assets/images/course/design.jpg" alt="">
+								<img src="../assets/images/course/design.jpg" alt="">
 							</a>
 						</div>
 						<div class="course-info">
@@ -255,7 +252,7 @@
 					<div class="single-course wow fadeInUp" data-wow-delay=".6s">
 						<div class="course-img">
 							<a href="course-single.html">
-								<img src="assets/images/course/js.jpg" alt="">
+								<img src="../assets/images/course/js.jpg" alt="">
 							</a>
 						</div>
 						<div class="course-info">
@@ -286,7 +283,7 @@
 					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
 						<div class="course-img">
 							<a href="course-single.html">
-								<img src="assets/images/course/business.jpg" alt="">
+								<img src="../assets/images/course/business.jpg" alt="">
 							</a>
 						</div>
 						<div class="course-info">
@@ -315,7 +312,7 @@
 					<div class="single-course wow fadeInUp" data-wow-delay=".4s">
 						<div class="course-img">
 							<a href="course-single.html">
-								<img src="assets/images/course/marketing.jpg" alt="">
+								<img src="../assets/images/course/marketing.jpg" alt="">
 							</a>
 						</div>
 						<div class="course-info">
@@ -344,7 +341,7 @@
 					<div class="single-course wow fadeInUp" data-wow-delay=".6s">
 						<div class="course-img">
 							<a href="course-single.html">
-								<img src="assets/images/course/python.jpg" alt="">
+								<img src="../assets/images/course/python.jpg" alt="">
 							</a>
 						</div>
 						<div class="course-info">
@@ -401,7 +398,7 @@
 				</div>
 				<div class="col-xl-6 col-lg-6">
 					<div class="welcome-img">
-						<img src="assets/images/welcome-img.png" alt="">
+						<img src="../assets/images/welcome-img.png" alt="">
 					</div>
 				</div>
 			</div>
@@ -534,7 +531,7 @@
 					<div class="single-blog">
 						<div class="blog-img">
 							<a href="javascript:void(0)" class="d-block">
-								<img src="assets/images/blog/blog-1.jpg" alt="">
+								<img src="../assets/images/blog/blog-1.jpg" alt="">
 							</a>
 						</div>
 						<div class="blog-content">
@@ -548,7 +545,7 @@
 					<div class="single-blog">
 						<div class="blog-img">
 							<a href="javascript:void(0)" class="d-block">
-								<img src="assets/images/blog/blog-2.jpg" alt="">
+								<img src="../assets/images/blog/blog-2.jpg" alt="">
 							</a>
 						</div>
 						<div class="blog-content">
@@ -561,7 +558,7 @@
 					<div class="single-blog">
 						<div class="blog-img">
 							<a href="javascript:void(0)" class="d-block">
-								<img src="assets/images/blog/blog-3.jpg" alt="">
+								<img src="../assets/images/blog/blog-3.jpg" alt="">
 							</a>
 						</div>
 						<div class="blog-content">
@@ -578,7 +575,7 @@
 	<!--====== CONTACT PART START ======-->
 	<section id="contact" class="contact-area">
 		<div class="map-bg">
-			<img src="assets/images/map-bg.svg" alt="">
+			<img src="../assets/images/map-bg.svg" alt="">
 		</div>
 		<div class="container">
 			<div class="row">
@@ -595,7 +592,7 @@
 				</div>
 				<div class="col-xl-7 col-lg-7">
 					<div class="contact-form-wrapper">
-						<form action="assets/contact.php">
+						<form action="../assets/contact.php">
 							<div class="row">
 								<div class="col-md-6">
 									<input type="text" placeholder="Name" name="name" id="name">
@@ -634,7 +631,7 @@
 				<div class="col-xl-3 col-lg-3 col-md-6">
 					<div class="footer-widget">
 						<a href="index.html" class="logo d-blok">
-							<img src="assets/images/logo.svg" alt="">
+							<img src="../assets/images/logo.svg" alt="">
 						</a>
 						<p>Lorem ipsum dolor sit amco nsetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna .</p>
 					</div>
@@ -701,13 +698,13 @@
 
 
 	<!--====== Bootstrap js ======-->
-	<script src="assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
+	<script src="../assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
 
 	<!--====== wow js ======-->
-	<script src="assets/js/wow.min.js"></script>
+	<script src="../assets/js/wow.min.js"></script>
 
 	<!--====== Main js ======-->
-	<script src="assets/js/main.js"></script>
+	<script src="../assets/js/main.js"></script>
 
 	<script>
 

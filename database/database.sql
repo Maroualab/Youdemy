@@ -11,8 +11,25 @@ CREATE TABLE Users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role ENUM('Student', 'Teacher', 'Admin') NOT NULL,
+    status ENUM('pending', 'suspended', 'active') NOT NULL;
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+DELIMITER //
+
+CREATE TRIGGER set_default_status BEFORE INSERT ON Users
+FOR EACH ROW
+BEGIN
+    IF NEW.role = 'Teacher' THEN
+        SET NEW.status = 'pending';
+    ELSE
+        SET NEW.status = 'active';
+    END IF;
+END;
+
+//
+
+DELIMITER ;
 
 -- Créer la table Categories
 CREATE TABLE Categories (

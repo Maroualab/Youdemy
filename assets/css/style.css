@@ -1454,7 +1454,7 @@ textarea:focus {
 }
 
 .navbar-nav .nav-item a.header-btn {
-  padding: 12px 28px;
+  padding:8px 20px;
   border-radius: 30px;
   background: #F2A92C;
   color: #fff;

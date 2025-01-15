@@ -2,34 +2,21 @@
 // config/Database.php
 
 class Database {
-    private $host = "localhost";
-    private $db_name = "youdemy";
-    private $username = "root";
-    private $password = "";
-    public $conn;
+    private static $host = "localhost";
+    private static $db_name = "youdemy";
+    private static $username = "root";
+    private static $password = "";
+    private static $conn = null;
 
-    // Table names
-    public $tables = [
-        'users' => 'Users',
-        'courses' => 'Courses',
-        'categories' => 'Categories',
-        'tags' => 'Tags',
-        'course_tags' => 'CourseTags',
-        'enrollments' => 'Enrollments'
-    ];
-
-    public function getConnection() {
-        $this->conn = null;
-        try {
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-            $this->conn->exec("set names utf8");
-        } catch (PDOException $exception) {
-            echo "Connection error: " . $exception->getMessage();
+    public static function getConnection() {
+        if (self::$conn === null) {
+            try {
+                self::$conn = new PDO("mysql:host=" . self::$host . ";dbname=" . self::$db_name, self::$username, self::$password);
+                self::$conn->exec("set names utf8");
+            } catch (PDOException $exception) {
+                echo "Connection error: " . $exception->getMessage();
+            }
         }
-        return $this->conn;
-    }
-
-    public function getTableName($table) {
-        return $this->tables[$table];
+        return self::$conn;
     }
 }
