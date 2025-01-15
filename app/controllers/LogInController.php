@@ -1,11 +1,12 @@
 <?php
 
 require_once '../../config/Database.php'; 
-require_once '../controllers/User.php'; 
+require_once '../models/User.php';
+include_once '../repositories/accountManager.php'; 
 
-session_start(); 
+// session_start(); 
 
-if (isset($_POST['login'])) {
+if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -17,11 +18,10 @@ if (isset($_POST['login'])) {
             throw new Exception("Password is required.");
         }
 
-        // Create an instance of User class
-        $user = new User(null, $email, $password);
-        $user->login();
-
+        $userManager = new AccountManager();
+        $userManager->login($email, $password);
     } catch (Exception $e) {
         echo $e->getMessage(); 
     }
 }
+?>

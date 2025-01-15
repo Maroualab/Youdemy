@@ -10,21 +10,14 @@ class User
     private $role;
     protected $conn;
 
-    public function __construct($username = null, $email = null, $password = null, $role = null)
+    public function __construct($username , $email , $password , $role )
     {
         $this->conn = Database::getConnection();
-
-        if ($username && $email && $password && $role) {
-            // Registration Constructor
             $this->username = $username;
             $this->email = $email;
             $this->password = $password;
             $this->role = $role;
-        } elseif ($email && $password) {
-            // Login Constructor
-            $this->email = $email;
-            $this->password = $password;
-        }
+        
     }
 
     public function register()
@@ -48,7 +41,7 @@ class User
 
     private function hashPassword($password)
     {
-        return password_hash($password, PASSWORD_DEFAULT);
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 
     private function insertUser()
@@ -74,44 +67,6 @@ class User
         } catch (PDOException $e) {
             throw new Exception("Error: " . $e->getMessage());
         }
-    }
-
-    public function login()
-    {
-        $this->checkEmailExistsLogin($this->email);
-        $this->verifyPasswordAndLogin();
-    }
-
-    private function checkEmailExistsLogin($email)
-    {
-        $sql = "SELECT * FROM users WHERE email = :email";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        if ($stmt->rowCount() === 0) {
-            throw new Exception("Email not registered.");
-        }
-
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    private function verifyPasswordAndLogin()
-    {
-        $user = $this->checkEmailExistsLogin($this->email);
-
-        if (!password_verify($this->password, $user['password'])) {
-            throw new Exception("Invalid password.");
-        }
-
-        session_start();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['username'];
-        $_SESSION['user_role'] = $user['role'];
-
-        // Redirect to a protected page
-        header("Location: ../views/courses/coursesCatalog.php");
-        exit();
     }
 }
 

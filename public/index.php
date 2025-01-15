@@ -88,8 +88,8 @@
 										<a class="page-scroll" href="#contact">Contact</a>
 									</li>
 									<li class="nav-item" style="display:flex;gap:10px;">
-										<a class="header-btn btn-hover" href="/website/app/Views/auth/login.php">signIn</a>
-										<a class="header-btn btn-hover" href="/website/app/Views/auth/sign-up.php">signUp</a>
+										<a class="header-btn btn-hover" href="/website/app/Views/auth/sign-up.php">Sign Up</a>
+										<a class="header-btn btn-hover" href="/website/app/Views/auth/login.php">Log In</a>
 									</li>
 								</ul>
 							</div> <!-- navbar collapse -->
