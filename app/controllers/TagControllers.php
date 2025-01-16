@@ -22,5 +22,3 @@ $tags = TagManager::fetchAllTags();
 
 
 
-
-

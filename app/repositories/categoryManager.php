@@ -3,7 +3,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/website/config/database.php'; 
 
 
-class TagManager {
+class CategoryManager{
 
     protected $conn;
 
@@ -11,29 +11,30 @@ class TagManager {
         $this->conn = Database::getConnection();
     }
 
-    public static function fetchAllTags() {
-        // Create an instance of TagManager to access the connection
+    public static function fetchAllCategories() {
         $instance = new self();
-        $sql = "SELECT * FROM tags";
+        $sql = "SELECT * FROM categories";
         $stmt = $instance->conn->prepare($sql);
         $stmt->execute();
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function deleteTag($id) {
+    public static function deleteCategory($id) {
         $instance = new self();
-        $sql = "DELETE FROM tags WHERE id = :id";
-        $stmt = $instance->conn->prepare($sql);
+
+        $sql = "DELETE FROM categories WHERE id = :id";
+        $stmt =$instance->conn->prepare($sql);
         return $stmt->execute(['id' => $id]);
     }
 
-    public static function updateTag($id, $name) {
+
+
+    public static function updateCategory($id, $name) {
         $instance = new self();
-        $sql = "UPDATE tags SET name = :name WHERE id = :id";
+
+        $sql = "UPDATE categories SET name = :name WHERE id = :id";
         $stmt = $instance->conn->prepare($sql);
-        return $stmt->execute(['name' => $name, 'id' => $id]);
+        return $stmt->execute(['id' => $id, 'name' => $name]);
     }
-
-
 }
