@@ -1,18 +1,26 @@
 <?php
-require_once '../../config/database.php'; 
-require_once '../models/Tag.php'; 
-
+require_once $_SERVER['DOCUMENT_ROOT'].'/website/config/database.php'; 
+require_once $_SERVER['DOCUMENT_ROOT'].'/website/app/models/Tag.php'; 
+require_once $_SERVER['DOCUMENT_ROOT'].'/website/app/repositories/tagManager.php'; 
 
 if( isset($_POST['add_tag'])){
+
     $tag=$_POST['tag'];
 
     $tag=new Tag($tag);
+
     $tag->insertTag();
 
-}elseif (isset($_POST['delete_tag'])) {
+    header("Location: ../views/admin/TagCategory.php");
 
-    $tag->deleteTag($_POST['delete_tag']);
 }
+
+$tagManager = new TagManager();
+
+$tags = TagManager::fetchAllTags(); 
+
+
+
 
 
 

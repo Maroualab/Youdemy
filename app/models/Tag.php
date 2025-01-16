@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../config/database.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/website/config/database.php';
 
 class Tag{
 
@@ -22,17 +22,5 @@ class Tag{
         $stmt->execute(['name'=>$this->tag]);
     }
 
-    public function fetchAllTags() {
-        $sql = "SELECT * FROM tags";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all tags
-    }
 
-    public function deleteTag($id) {
-        $sql = "DELETE FROM tags WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute(['id' => $id]);
-    }
 }
