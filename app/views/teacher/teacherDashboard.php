@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard - Youdemy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jodit/4.0.1/es2021/jodit.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jodit/4.0.1/es2021/jodit.min.js"></script>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -357,6 +362,11 @@
             background: #ccc;
             border-radius: 3px;
         }
+
+        :root {
+--jd-color-border: #f5a623;
+--jd-color-icon: #000000;
+}
     </style>
 </head>
 
@@ -386,6 +396,11 @@
                     <label for="courseDescription">Course Description</label>
                     <textarea id="courseDescription" name="description" rows="4" required></textarea>
                 </div>
+
+
+                <textarea id="editor" name="editor"></textarea>
+
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="courseCategory">Category</label>
@@ -537,6 +552,14 @@
             </div>
         </section>
     </main>
+
+
+    <script>
+	const editor = Jodit.make("#editor", {
+  "iframe": true
+});
+editor.value = '<p>start</p>';
+</script>
 </body>
 
 </html>
