@@ -1,3 +1,24 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CategoryControllers.php';
+$categories = CategoryManager::fetchAllCategories();
+global $categories;
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/TagControllers.php';
+$tags = TagManager::fetchAllTags();
+global $tags;
+
+
+session_start();
+
+if (!isset($_SESSION['teacher_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$teacher_id = $_SESSION['teacher_id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,11 +26,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard - Youdemy</title>
-    <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/jodit/4.0.1/es2021/jodit.min.css"
-/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jodit/4.0.1/es2021/jodit.min.js"></script>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
+
 
     <style>
         * {
@@ -362,11 +381,6 @@
             background: #ccc;
             border-radius: 3px;
         }
-
-        :root {
---jd-color-border: #f5a623;
---jd-color-icon: #000000;
-}
     </style>
 </head>
 
@@ -384,9 +398,12 @@
             </div>
         </nav>
     </header>
+
+
     <main class="dashboard-main">
         <section id="add-course" class="dashboard-section">
             <h2><i class="fas fa-plus-circle"></i> Add New Course</h2>
+            
             <form id="newCourseForm" class="course-form">
                 <div class="form-group">
                     <label for="courseTitle">Course Title</label>
@@ -394,24 +411,26 @@
                 </div>
                 <div class="form-group">
                     <label for="courseDescription">Course Description</label>
-                    <textarea id="courseDescription" name="description" rows="4" required></textarea>
+                    <textarea name="content" id="editor"></textarea>
+                    <!-- <textarea id="courseDescription" name="description" rows="4" required></textarea> -->
                 </div>
 
-
-                <textarea id="editor" name="editor"></textarea>
-
-
                 <div class="form-row">
+
                     <div class="form-group">
                         <label for="courseCategory">Category</label>
                         <select id="courseCategory" name="category" required>
                             <option value="">Select Category</option>
-                            <option value="development">Development</option>
-                            <option value="design">Design</option>
-                            <option value="business">Business</option>
-                            <option value="marketing">Marketing</option>
+                            <?php foreach ($categories as $category) {
+                                echo "
+                                <option value='$category[id]'>
+                                    $category[name]</option>
+                                ";
+                            } ?>
                         </select>
                     </div>
+
+
                     <div class="form-group">
                         <label for="courseType">Course Type</label>
                         <select id="courseType" name="type" required>
@@ -421,76 +440,33 @@
                             <option value="mixed">Mixed Content</option>
                         </select>
                     </div>
+
+
                 </div>
                 <div class="form-group">
                     <label>Course Tags</label>
                     <div class="tags-wrapper">
-                        <div class="tags-search">
+                        <!-- <div class="tags-search">
                             <input type="text" id="tagSearch" placeholder="Search tags...">
                             <span class="selected-count">0 selected</span>
-                        </div>
+                        </div> -->
                         <div class="tags-container">
                             <div class="tags-group">
-                                <h4>Programming</h4>
+                                <h4>Tags</h4>
                                 <div class="tags-list">
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="javascript">
-                                        <span>JavaScript</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="python">
-                                        <span>Python</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="java">
-                                        <span>Java</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="php">
-                                        <span>PHP</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="tags-group">
-                                <h4>Web Development</h4>
-                                <div class="tags-list">
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="html">
-                                        <span>HTML</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="css">
-                                        <span>CSS</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="react">
-                                        <span>React</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="angular">
-                                        <span>Angular</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="tags-group">
-                                <h4>Tools</h4>
-                                <div class="tags-list">
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="git">
-                                        <span>Git</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="docker">
-                                        <span>Docker</span>
-                                    </label>
-                                    <label class="tag">
-                                        <input type="checkbox" name="tags[]" value="vscode">
-                                        <span>VS Code</span>
-                                    </label>
+                                    <?php foreach ($tags as $tag){
+                                        echo "
+                                        <label class='tag'>
+                                            <input type='checkbox' name='tags[]' value=' $tag[id]'>
+                                            <span>$tag[name]</span>
+                                        </label>
+                                      ";}?>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
                 </div>
                 <div class="form-group content-upload-section" style="display: none;">
                     <label>Course Content</label>
@@ -553,13 +529,14 @@
         </section>
     </main>
 
-
     <script>
-	const editor = Jodit.make("#editor", {
-  "iframe": true
-});
-editor.value = '<p>start</p>';
-</script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
 </body>
 
 </html>

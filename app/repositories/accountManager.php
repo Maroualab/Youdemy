@@ -35,18 +35,21 @@ class AccountManager {
         }
 
         session_start();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['username'];
-        $_SESSION['user_role'] = $user['role'];
-        $_SESSION['user_status'] = $user['status'];
+        // $_SESSION['user_id'] = $user['id'];
+        // $_SESSION['user_name'] = $user['username'];
+        // $_SESSION['user_role'] = $user['role'];
+        // $_SESSION['user_status'] = $user['status'];
 
         if ($user['status'] === 'suspended') {
             header("Location: ../views/auth/suspendedAccount.php");
         } elseif ($user['role'] === 'Teacher' && $user['status'] === 'pending') {
             header("Location: ../views/teacher/pendingAccount.php");
         } elseif ($user['role'] === 'Teacher' && $user['status'] === 'active') {
+            $_SESSION['teacher_id'] = $user['id'];
+            $_SESSION['user_role'] = $user['role'];
             header("Location: ../views/teacher/teacherDashboard.php");
         } elseif ($user['role'] === 'Student') {
+            $_SESSION['student_id'] = $user['id'];
             header("Location: ../views/courses/coursesCatalog.php");
         } elseif ($user['role'] === 'Admin') {
             header("Location: ../views/admin/adminDashboard.php");
