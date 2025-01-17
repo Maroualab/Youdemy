@@ -1,12 +1,4 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CategoryControllers.php';
-$categories = CategoryManager::fetchAllCategories();
-global $categories;
-
-include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/TagControllers.php';
-$tags = TagManager::fetchAllTags();
-global $tags;
-
 
 session_start();
 
@@ -16,6 +8,17 @@ if (!isset($_SESSION['teacher_id'])) {
 }
 
 $teacher_id = $_SESSION['teacher_id'];
+
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CategoryControllers.php';
+$categories = CategoryManager::fetchAllCategories();
+global $categories;
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/TagControllers.php';
+$tags = TagManager::fetchAllTags();
+global $tags;
+
+
 
 ?>
 
@@ -391,9 +394,9 @@ $teacher_id = $_SESSION['teacher_id'];
                 <h1>Youdemy</h1>
             </div>
             <div class="nav-links">
-                <a href="#add-course" class="active"><i class="fas fa-plus-circle"></i> Add Course</a>
-                <a href="#manage-courses"><i class="fas fa-tasks"></i> Manage Courses</a>
-                <a href="#statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+                <a href="#add-course" id="addSection" class="active"><i class="fas fa-plus-circle"></i> Add Course</a>
+                <a href="#manage-courses" id="manageSection"><i class="fas fa-tasks"></i> Manage Courses</a>
+                <a href="#statistics" id="statisticsSection"><i class="fas fa-chart-bar"></i> Statistics</a>
                 <a href="#logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </nav>
@@ -404,7 +407,7 @@ $teacher_id = $_SESSION['teacher_id'];
         <section id="add-course" class="dashboard-section">
             <h2><i class="fas fa-plus-circle"></i> Add New Course</h2>
 
-            <form id="newCourseForm" class="course-form">
+            <form id="newCourseForm" class="course-form" action="../../controllers/CourseControllers.php" method="POST">
 
                 <div class="form-group">
                     <label for="courseTitle">Course Title</label>
@@ -414,9 +417,9 @@ $teacher_id = $_SESSION['teacher_id'];
                 <div class="form-group">
                     <label for="courseDescription">Course Description</label>
                     <textarea id="courseDescription" name="description" rows="4" required></textarea>
-                    
+
                     <label for="courseContent">Course Content</label>
-                    <textarea name="content" id="editor" ></textarea>
+                    <textarea name="content" id="editor"></textarea>
                 </div>
 
                 <div class="form-row">
@@ -435,15 +438,15 @@ $teacher_id = $_SESSION['teacher_id'];
                     </div>
 
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="courseType">Course Type</label>
-                        <select id="courseType" name="type" required>
+                        <select id="courseType"  >
                             <option value="">Select Type</option>
                             <option value="video">Video Course</option>
                             <option value="document">Document Based</option>
                             <option value="mixed">Mixed Content</option>
                         </select>
-                    </div>
+                    </div> -->
 
 
                 </div>
@@ -458,13 +461,14 @@ $teacher_id = $_SESSION['teacher_id'];
                             <div class="tags-group">
                                 <h4>Tags</h4>
                                 <div class="tags-list">
-                                    <?php foreach ($tags as $tag){
+                                    <?php foreach ($tags as $tag) {
                                         echo "
-                                        <label class='tag'>
-                                            <input type='checkbox' name='tags[]' value=' $tag[id]'>
-                                            <span>$tag[name]</span>
-                                        </label>
-                                      ";}?>
+                        <label class='tag'>
+                            <input type='checkbox' name='tags[]' value='$tag[id]'>
+                            <span>$tag[name]</span>
+                        </label>
+                        ";
+                                    } ?>
                                 </div>
                             </div>
                         </div>
@@ -472,7 +476,8 @@ $teacher_id = $_SESSION['teacher_id'];
                 </div>
 
                 </div>
-                <div class="form-group content-upload-section" style="display: none;">
+
+                <!-- <div class="form-group content-upload-section" style="display: none;">
                     <label>Course Content</label>
                     <div class="content-upload">
                         <div class="upload-box">
@@ -486,10 +491,13 @@ $teacher_id = $_SESSION['teacher_id'];
                             <input type="file" accept=".pdf,.doc,.docx" name="document" id="documentUpload">
                         </div>
                     </div>
-                </div>
+                </div> -->
+
                 <button type="submit" name="submit" class="submit-btn">Create Course</button>
             </form>
         </section>
+
+
         <section id="manage-courses" class="dashboard-section" style="display: none;">
             <h2><i class="fas fa-tasks"></i> Manage Courses</h2>
             <div class="search-bar">
@@ -498,6 +506,8 @@ $teacher_id = $_SESSION['teacher_id'];
             <div class="courses-grid">
             </div>
         </section>
+
+
         <section id="statistics" class="dashboard-section" style="display: none;">
             <h2><i class="fas fa-chart-bar"></i> Course Statistics</h2>
             <div class="stats-grid">
@@ -531,6 +541,8 @@ $teacher_id = $_SESSION['teacher_id'];
                 </div>
             </div>
         </section>
+
+
     </main>
 
     <script>
@@ -539,6 +551,52 @@ $teacher_id = $_SESSION['teacher_id'];
             .catch(error => {
                 console.error(error);
             });
+
+
+            let managebutton = document.getElementById("manageSection");
+            let manageSection = document.getElementById("manage-courses");
+            let addbutton =document.getElementById("addSection");
+            let addSection = document.getElementById("add-course");
+            let statisticsbutton = document.getElementById("statisticsSection");
+            let statisticsSection = document.getElementById("statistics");
+
+
+            managebutton.addEventListener("click",function(){
+                addSection.style.display = 'none';
+                manageSection.style.display = 'block';
+                statisticsSection.style.display = 'none';
+
+                addbutton.classList.remove("active");
+                managebutton.classList.add("active");
+                statisticsbutton.classList.remove("active");
+    
+            })
+            
+            addbutton.addEventListener("click",()=>{
+                addSection.style.display = 'block';
+                manageSection.style.display = 'none';
+                statisticsSection.style.display = 'none';
+
+                addbutton.classList.add("active");
+                managebutton.classList.remove("active");
+                statisticsbutton.classList.remove("active");
+            })
+
+            statisticsbutton.addEventListener("click",()=>{
+                addSection.style.display = 'none';
+                manageSection.style.display = 'none';
+                statisticsSection.style.display = 'block';
+
+                addbutton.classList.remove("active");
+                managebutton.classList.remove("active");
+                statisticsbutton.classList.add("active");
+            })
+
+
+
+
+
+    
     </script>
 
 </body>
