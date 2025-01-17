@@ -46,7 +46,6 @@ class AccountManager {
             header("Location: ../views/teacher/pendingAccount.php");
         } elseif ($user['role'] === 'Teacher' && $user['status'] === 'active') {
             $_SESSION['teacher_id'] = $user['id'];
-            $_SESSION['user_role'] = $user['role'];
             header("Location: ../views/teacher/teacherDashboard.php");
         } elseif ($user['role'] === 'Student') {
             $_SESSION['student_id'] = $user['id'];

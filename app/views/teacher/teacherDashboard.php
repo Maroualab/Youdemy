@@ -11,7 +11,7 @@ global $tags;
 session_start();
 
 if (!isset($_SESSION['teacher_id'])) {
-    header('Location: login.php');
+    header('Location: ../auth/login.php');
     exit();
 }
 
@@ -403,16 +403,20 @@ $teacher_id = $_SESSION['teacher_id'];
     <main class="dashboard-main">
         <section id="add-course" class="dashboard-section">
             <h2><i class="fas fa-plus-circle"></i> Add New Course</h2>
-            
+
             <form id="newCourseForm" class="course-form">
+
                 <div class="form-group">
                     <label for="courseTitle">Course Title</label>
                     <input type="text" id="courseTitle" name="title" required>
                 </div>
+
                 <div class="form-group">
                     <label for="courseDescription">Course Description</label>
-                    <textarea name="content" id="editor"></textarea>
-                    <!-- <textarea id="courseDescription" name="description" rows="4" required></textarea> -->
+                    <textarea id="courseDescription" name="description" rows="4" required></textarea>
+                    
+                    <label for="courseContent">Course Content</label>
+                    <textarea name="content" id="editor" ></textarea>
                 </div>
 
                 <div class="form-row">
@@ -483,7 +487,7 @@ $teacher_id = $_SESSION['teacher_id'];
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="submit-btn">Create Course</button>
+                <button type="submit" name="submit" class="submit-btn">Create Course</button>
             </form>
         </section>
         <section id="manage-courses" class="dashboard-section" style="display: none;">

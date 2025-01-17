@@ -79,7 +79,7 @@
 										<a class="page-scroll" href="#courses">Courses</a>
 									</li>
 									<li class="nav-item">
-										<a class="page-scroll" href="#mentors">Mentors</a>
+										<a class="page-scroll" href="#categories">Categories</a>
 									</li>
 									<li class="nav-item">
 										<a class="page-scroll" href="#blog">Blog</a>
@@ -371,7 +371,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="view-all-btn text-center">
-						<a href="courses.html" class="main-btn">View All Course</a>
+						<a href="../app/views/courses/coursesCatalog.php" class="main-btn">View All Course</a>
 					</div>
 				</div>
 			</div>
@@ -381,7 +381,7 @@
 
 
 	<!--====== WELCOME PART START ======-->
-	<section class="welcome-area">
+	<!-- <section class="welcome-area">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-xl-6 col-lg-6">
@@ -403,11 +403,11 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!--====== WELCOME PART ENDS ======-->
 
 	<!--====== CATEGORIES PART START ======-->
-	<section class="categories-area pt-170 pb-170">
+	<section id="categories" class="categories-area pt-170 pb-170">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-8 col-lg-10 mx-auto">
@@ -486,7 +486,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="view-all-btn text-center">
-						<a href="javascript:void(0)" class="main-btn">View All Course</a>
+						<a href="../app/views/courses/coursesCatalog.php" class="main-btn">View All Course</a>
 					</div>
 				</div>
 			</div>
@@ -495,7 +495,7 @@
 	<!--====== CATEGORIES PART ENDS ======-->
 
 	<!--====== TEAM PART START ======-->
-	<section id="mentors" class="team-area pt-170 pb-140">
+	<!-- <section id="mentors" class="team-area pt-170 pb-140">
 					<div class="welcome-content text-center">
 						<div class="section-title">
 							<h2 class="mb-35 wow fadeInUp" data-wow-delay=".2s">You are using free lite version of Learn</h2>
@@ -506,13 +506,11 @@
 							<a href="https://rebrand.ly/learn-ud" rel="nofollow" class="main-btn wow fadeInUp" data-wow-delay=".5s">Purchase Now <i class="lni lni-arrow-right"></i></a>
 						</div>
 					</div>
-	</section>
+	</section> -->
 	<!--====== TEAM PART ENDS ======-->
 
 	<!--====== TESTIMONIAL PART START ======-->
-	<section class="testimonial-area pt-80 pb-90">
-
-	</section>
+	
 	<!--====== TESTIMONIAL PART ENDS ======-->
 
 	<!--====== BLOG PART START ======-->
@@ -670,23 +668,14 @@
 				</div>
 			</div>
 			<div class="footer-credit">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="copy-right text-center text-md-left">
-							<p>Designed and Developed by <a href="https://uideck.com" rel="nofollow">UIdeck</a></p>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="footer-social">
-							<ul class="d-flex justify-content-md-end justify-content-center">
-								<li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-								<li><a href="javascript:void(0)"><i class="lni lni-twitter-filled"></i></a></li>
-								<li><a href="javascript:void(0)"><i class="lni lni-instagram-filled"></i></a></li>
-								<li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="copy-right text-center text-md-left">
+                            <p class="text-center">Designed and Developed by <a href="https://github.com/Maroualab/Youdemy">Maroua Labballi</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 			</div>
 		</div>
 	</footer>
