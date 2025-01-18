@@ -52,6 +52,7 @@ CREATE TABLE Courses (
     teacher_id INT,
     category_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    img VARCHAR(255) NOT NULL,
     FOREIGN KEY (teacher_id) REFERENCES Users(id),
     FOREIGN KEY (category_id) REFERENCES Categories(id)
 );

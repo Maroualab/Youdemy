@@ -16,7 +16,7 @@ class CourseManager
     public function getAllCourses()
     {
         $sql = "SELECT * FROM courses";
-        $stmt = $this->conn->query($sql);
+        $stmt = $this->conn->prepare($sql);
 
         if ($stmt->rowCount() > 0) {
             $courses = [];
@@ -39,18 +39,19 @@ class CourseManager
         return $result;
     }
 
-    public function insertCourse($title, $description, $content, $teacher_id, $category_id, $tags)
+    public function insertCourse($title, $description, $content, $teacher_id, $category_id, $tags, $image)
     {
         try {
-            $sql = "INSERT INTO courses (title, description, content, teacher_id, category_id) 
-            VALUES (:title, :description, :content, :teacher_id, :category_id)";
+            $sql = "INSERT INTO courses (title, description, content, teacher_id, category_id,img) 
+            VALUES (:title, :description, :content, :teacher_id, :category_id , :img)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 'title' => $title,
                 'description' => $description,
                 'content' => $content,
                 'teacher_id' => $teacher_id,
-                'category_id' => $category_id
+                'category_id' => $category_id,
+                'img'=>$image
             ]);
 
             $course_id = $this->conn->lastInsertId();
@@ -70,5 +71,7 @@ class CourseManager
         }
 
     }
+
+   
 }
 

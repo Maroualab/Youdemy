@@ -19,6 +19,14 @@ $tags = TagManager::fetchAllTags();
 global $tags;
 
 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
+$coursecatalog = new CourseManager();
+$coursecatalog = $coursecatalog->fetchCourseCatalog($teacher_id);
+
+if (isset($_SESSION['error'])) {
+    echo "<script>alert('" . $_SESSION['error'] . "');</script>";
+    unset($_SESSION['error']);
+}
 
 ?>
 
@@ -30,6 +38,13 @@ global $tags;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard - Youdemy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="../../../assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../../../assets/css/animate.css">
+    <link rel="stylesheet" href="../../../assets/css/LineIcons.2.0.css">
+    <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <!-- <link href="../../../public/src/output.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
 
 
@@ -249,13 +264,13 @@ global $tags;
         }
 
         /* Search bar */
-        .search-bar {
+        /* .search-bar {
             margin-bottom: 2rem;
-        }
+        } */
 
         .search-bar input {
             width: 100%;
-            max-width: 400px;
+            /* max-width: 400px; */
             padding: 0.8rem;
             border: 2px solid #e9ecef;
             border-radius: 5px;
@@ -384,15 +399,32 @@ global $tags;
             background: #ccc;
             border-radius: 3px;
         }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .pagination {
+            justify-content: center;
+            margin-top: 20px;
+        }
     </style>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="../../../assets/images/favicon.png" type="image/png">
+
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo">
-                <h1>Youdemy</h1>
-            </div>
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="../../../public/index.php">
+                    <img id="logo" src="../../../assets/images/logo.svg" alt="Logo">
+                </a>
+            </nav>
             <div class="nav-links">
                 <a href="#add-course" id="addSection" class="active"><i class="fas fa-plus-circle"></i> Add Course</a>
                 <a href="#manage-courses" id="manageSection"><i class="fas fa-tasks"></i> Manage Courses</a>
@@ -405,9 +437,29 @@ global $tags;
 
     <main class="dashboard-main">
         <section id="add-course" class="dashboard-section">
-            <h2><i class="fas fa-plus-circle"></i> Add New Course</h2>
+            <!-- <h2><i class="fas fa-plus-circle"></i> Add New Course</h2> -->
 
-            <form id="newCourseForm" class="course-form" action="../../controllers/CourseControllers.php" method="POST">
+
+
+            <form id="newCourseForm" class="course-form" action="../../controllers/CourseControllers.php" method="POST"
+                enctype="multipart/form-data">
+
+
+                <div class="form-group content-upload-section">
+                    <label>Course Content</label>
+                    <div class="content-upload">
+                        <div class="upload-box">
+                            <!-- <i class="fas fa-file-pdf"></i> -->
+                            <i class="fa-solid fa-image"></i>
+                            <label for="imgUpload">
+                                <p>Upload Course Banner</p>
+                            </label>
+
+                            <input type="file" accept=".pdf,.jpg,.png" name="img" id="imgUpload">
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <label for="courseTitle">Course Title</label>
@@ -420,6 +472,7 @@ global $tags;
 
                     <label for="courseContent">Course Content</label>
                     <textarea name="content" id="editor"></textarea>
+
                 </div>
 
                 <div class="form-row">
@@ -477,34 +530,86 @@ global $tags;
 
                 </div>
 
-                <!-- <div class="form-group content-upload-section" style="display: none;">
-                    <label>Course Content</label>
-                    <div class="content-upload">
-                        <div class="upload-box">
-                            <i class="fas fa-video"></i>
-                            <p>Upload Video</p>
-                            <input type="file" accept="video/*" name="video" id="videoUpload">
-                        </div>
-                        <div class="upload-box">
-                            <i class="fas fa-file-pdf"></i>
-                            <p>Upload Document</p>
-                            <input type="file" accept=".pdf,.doc,.docx" name="document" id="documentUpload">
-                        </div>
-                    </div>
-                </div> -->
-
                 <button type="submit" name="submit" class="submit-btn">Create Course</button>
             </form>
         </section>
 
 
         <section id="manage-courses" class="dashboard-section" style="display: none;">
-            <h2><i class="fas fa-tasks"></i> Manage Courses</h2>
-            <div class="search-bar">
-                <input type="text" id="courseSearch" placeholder="Search courses...">
+            <!-- <h2><i class="fas fa-tasks"></i> Manage Courses</h2> -->
+
+            <!--====== CATALOG PART START ======-->
+            <!-- <section id="catalog" class="course-area pt-140 pb-170"> -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-7 col-md-10 mx-auto">
+                        <div class="section-title text-center mb-50">
+                            <h2 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Course Catalog</h2>
+                            <p class="wow fadeInUp" data-wow-delay=".4s">Explore our comprehensive range of free online
+                                courses designed to help you succeed.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="search-bar text-center">
+                            <input type="text" id="search" placeholder="Search courses by keywords..."
+                                class="form-control" onkeyup="filterCourses()">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="course-list" class="row mb-30">
+                    <!-- Existing Course -->
+                    <?php
+                    print_r($coursecatalog);
+                    foreach ($coursecatalog as $displaycourse) {
+                        echo "
+                    <div class='col-xl-4 col-lg-4 col-md-6'>
+                        <div class='single-course wow fadeInUp' data-wow-delay='.2s'>
+                            <div class='course-img'>
+                                <a href='./courseDetails.php'>
+                                    <img src='/website/assets/images/courseBanners/". htmlspecialchars($displaycourse['course_img']) . "' alt='course_picture'>
+                                </a>
+                            </div>
+                            <div class='course-info'>
+                                <h4><a href='./courseDetails.php?course_id=$displaycourse[course_id]'>$displaycourse[course_title]</a></h4>
+                            </div>
+                        </div>
+                    </div>
+               ";
+                    } 
+                    ?>
+
+
+
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
-            <div class="courses-grid">
-            </div>
+            <!-- </section> -->
+            <!--====== CATALOG PART ENDS ======-->
+
+            <!--====== COURSE DETAILS PART START ======-->
+
+
         </section>
 
 
@@ -552,51 +657,58 @@ global $tags;
                 console.error(error);
             });
 
+        let managebutton = document.getElementById("manageSection");
+        let manageSection = document.getElementById("manage-courses");
+        let addbutton = document.getElementById("addSection");
+        let addSection = document.getElementById("add-course");
+        let statisticsbutton = document.getElementById("statisticsSection");
+        let statisticsSection = document.getElementById("statistics");
 
-            let managebutton = document.getElementById("manageSection");
-            let manageSection = document.getElementById("manage-courses");
-            let addbutton =document.getElementById("addSection");
-            let addSection = document.getElementById("add-course");
-            let statisticsbutton = document.getElementById("statisticsSection");
-            let statisticsSection = document.getElementById("statistics");
+        managebutton.addEventListener("click", function () {
+            addSection.style.display = 'none';
+            manageSection.style.display = 'block';
+            statisticsSection.style.display = 'none';
+
+            addbutton.classList.remove("active");
+            managebutton.classList.add("active");
+            statisticsbutton.classList.remove("active");
+
+        })
+
+        addbutton.addEventListener("click", () => {
+            addSection.style.display = 'block';
+            manageSection.style.display = 'none';
+            statisticsSection.style.display = 'none';
+
+            addbutton.classList.add("active");
+            managebutton.classList.remove("active");
+            statisticsbutton.classList.remove("active");
+        })
+
+        statisticsbutton.addEventListener("click", () => {
+            addSection.style.display = 'none';
+            manageSection.style.display = 'none';
+            statisticsSection.style.display = 'block';
+
+            addbutton.classList.remove("active");
+            managebutton.classList.remove("active");
+            statisticsbutton.classList.add("active");
+        })
+
+        function filterCourses() {
+            const input = document.getElementById('search').value.toLowerCase();
+            const courses = document.querySelectorAll('.single-course');
+            courses.forEach(course => {
+                const title = course.querySelector('h4 a').textContent.toLowerCase();
+                if (title.includes(input)) {
+                    course.style.display = '';
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+        }
 
 
-            managebutton.addEventListener("click",function(){
-                addSection.style.display = 'none';
-                manageSection.style.display = 'block';
-                statisticsSection.style.display = 'none';
-
-                addbutton.classList.remove("active");
-                managebutton.classList.add("active");
-                statisticsbutton.classList.remove("active");
-    
-            })
-            
-            addbutton.addEventListener("click",()=>{
-                addSection.style.display = 'block';
-                manageSection.style.display = 'none';
-                statisticsSection.style.display = 'none';
-
-                addbutton.classList.add("active");
-                managebutton.classList.remove("active");
-                statisticsbutton.classList.remove("active");
-            })
-
-            statisticsbutton.addEventListener("click",()=>{
-                addSection.style.display = 'none';
-                manageSection.style.display = 'none';
-                statisticsSection.style.display = 'block';
-
-                addbutton.classList.remove("active");
-                managebutton.classList.remove("active");
-                statisticsbutton.classList.add("active");
-            })
-
-
-
-
-
-    
     </script>
 
 </body>
