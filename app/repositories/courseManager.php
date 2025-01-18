@@ -72,6 +72,37 @@ class CourseManager
 
     }
 
-   
+    public function fetchCourseCatalog($teacher_id){
+
+        $sql = "SELECT 
+    c.id AS course_id,
+    c.title AS course_title,
+    c.img AS course_img,
+    c.content AS course_content,
+    c.description AS course_description,
+    GROUP_CONCAT(t.name) AS course_tags,
+    cat.name AS course_category
+FROM 
+    Courses c
+JOIN 
+    Categories cat ON c.category_id = cat.id
+LEFT JOIN 
+    CourseTags ct ON c.id = ct.course_id
+LEFT JOIN 
+    Tags t ON ct.tag_id = t.id
+WHERE 
+    c.teacher_id = :teacher_id
+GROUP BY 
+    c.id;
+";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            'teacher_id' => $teacher_id
+        ]);
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }
 
