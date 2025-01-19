@@ -36,8 +36,9 @@ if( isset($_POST['submit'])){
 
     header("Location: ../views/teacher/teacherDashboard.php");
     
-
 }
+
+
 
 
 

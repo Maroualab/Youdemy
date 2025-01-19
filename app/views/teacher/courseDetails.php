@@ -1,5 +1,15 @@
 <?php
+session_start();
+$teacher_id = $_SESSION['teacher_id'];
 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
+if (isset($_GET['course_id'])) {
+
+    $course_id = $_GET['course_id'];
+    $singleCourse = new CourseManager();
+    $singleCourse = $singleCourse->fetchSingleCourse($course_id, $teacher_id);
+
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -7,7 +17,8 @@
 <head>
     <meta charset="utf-8">
     <title>Course Details - Full-stack Web Development</title>
-    <meta name="description" content="Discover the Full-stack Web Development course details, including topics covered, instructor information, and how to enroll.">
+    <meta name="description"
+        content="Discover the Full-stack Web Development course details, including topics covered, instructor information, and how to enroll.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="../../../assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
@@ -15,7 +26,7 @@
 
     <style>
         .hero {
-            background-image: url("../../../assets/images/course-bg.jpg");
+            /* background-image: url("../../../assets/images/course-bg.jpg"); */
             background-size: cover;
             background-position: center;
             color: #ffffff;
@@ -23,15 +34,18 @@
 
         .main-btn {
             padding: 12px 30px;
-            background-color: #fbbf24; /* Yellow Color */
-            color: #000000; /* Black for contrast */
+            background-color: #fbbf24;
+            /* Yellow Color */
+            color: #000000;
+            /* Black for contrast */
             border-radius: 0.375rem;
             text-decoration: none;
             transition: background-color 0.3s, transform 0.3s;
         }
 
         .main-btn:hover {
-            background-color: #d69e20; /* Darker Yellow */
+            background-color: #d69e20;
+            /* Darker Yellow */
             transform: scale(1.05);
         }
 
@@ -62,105 +76,107 @@
     <!--====== HEADER PART ENDS ======-->
 
     <!--====== HERO PART START ======-->
-    <section class="hero h-64 flex flex-col items-center justify-center bg-gray-800 text-white">
-        <h1 class="text-4xl font-bold">Full-stack Web Development</h1>
-        <p class="mt-2">Master the skills to become a full-stack web developer.</p>
+    <?php
+    print_r($singleCourse);
+    ?>
+
+    <section class="hero h-64 flex flex-col items-center justify-center relative"
+        style="background-image: url('/website/assets/images/courseBanners/<?php echo htmlspecialchars($singleCourse['course_img']); ?>');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <h1 class="text-4xl font-bold text-white z-20"><?php echo $singleCourse['course_title'] ?></h1>
+        <p class="mt-2 font-semibold text-white z-20"><?php echo $singleCourse['course_description'] ?></p>
     </section>
+
+
+
+
     <!--====== HERO PART ENDS ======-->
 
     <!--====== COURSE DETAILS PART START ======-->
-    <section class="py-10 p-10">
-        <div class="container mx-auto px-4 ">
-            <div class="flex flex-col lg:flex-row">
-                <div class="lg:w-2/3">
-                    <h2 class="text-3xl font-semibold">Course Description</h2>
-                    <p class="mt-4">This comprehensive course covers all aspects of web development, guiding you through both front-end and back-end technologies. You will learn to create dynamic web applications and gain proficiency in the development process.</p>
 
-                    <h2 class="mt-8 text-3xl font-semibold">Course Topics</h2>
-                    <ul class="list-disc ml-5 mt-4">
-                        <li>HTML5 & CSS3: Building structured and styled web pages.</li>
-                        <li>JavaScript: Making your web pages interactive.</li>
-                        <li>React: Building user interfaces with React.js.</li>
-                        <li>Node.js: Understanding server-side development.</li>
-                        <li>Express.js: Setting up your web server.</li>
-                        <li>MongoDB: Working with NoSQL databases.</li>
-                        <li>RESTful APIs: Creating APIs for seamless data exchange.</li>
-                        <li>Deployment: How to deploy your applications on cloud providers.</li>
-                    </ul>
+    <section class='py-10 p-10 bg-gray-100'>
+        <div class='container mx-auto px-4'>
+            <div class='flex flex-col lg:flex-row'>
+                <div class='lg:w-2/3'>
 
-                    <h2 class="mt-8 text-3xl font-semibold">Instructor</h2>
-                    <div class="flex items-center mt-4">
-                        <img src="../../../assets/images/instructor.jpg" alt="Instructor" class="instructor-image">
-                        <div class="ml-4">
-                            <strong class="text-lg">John Doe</strong>
-                            <p class="text-gray-500">John is a Senior Web Developer with over 10 years of experience in building scalable web applications and leading development teams. He is passionate about teaching and empowering the next generation of developers.</p>
-                        </div>
-                    </div>
 
-                    <h2 class="mt-8 text-3xl font-semibold">Course Highlights</h2>
-                    <ul class="list-disc ml-5 mt-4">
-                        <li>Extensive hands-on projects to apply your skills.</li>
-                        <li>Access to a community forum for collaboration and help.</li>
-                        <li>Real-world examples and case studies.</li>
-                        <li>Lifetime access to course materials and updates.</li>
-                    </ul>
+                    <h2 class='mt-8 text-3xl font-semibold'>Course Content</h2>
+                    <p class='mt-4'><?php echo $singleCourse['course_content'] ?></p>
 
-                    <h2 class="mt-8 text-3xl font-semibold">Curriculum</h2>
-                    <ul class="list-disc ml-5 mt-4">
-                        <li>Module 1: Introduction to Web Development</li>
-                        <li>Module 2: HTML & CSS Basics</li>
-                        <li>Module 3: JavaScript Essentials</li>
-                        <li>Module 4: Responsive Design</li>
-                        <li>Module 5: Frontend Frameworks Overview</li>
-                        <li>Module 6: Backend Development with Node.js</li>
-                        <li>Module 7: Database Management with MongoDB</li>
-                        <li>Module 8: Building and Consuming APIs</li>
-                        <li>Module 9: Deployment Strategies</li>
-                    </ul>
 
-                    <h2 class="mt-8 text-3xl font-semibold">Enroll Now</h2>
-                    <p class="mt-4">This course is entirely free! Click the button below to enroll and start your journey in full-stack web development.</p>
-                    <a href="#" class="main-btn mt-4">Enroll for Free</a>
+
+
+
+
+                    <a href='#' class='main-btn mt-4 bg-blue-500 text-white p-2 rounded'>Enroll for Free</a>
                 </div>
 
-                <div class="lg:w-1/3 lg:ml-10">
-                    <div class="bg-white shadow rounded-lg p-6">
-                        <h2 class="text-xl font-semibold">Course Info</h2>
-                        <div class="mt-4">
-                            <strong>Duration:</strong> 10 Weeks
+                <div class='lg:w-1/3 lg:ml-10'>
+                    <div class='bg-white shadow-lg rounded-lg p-6'>
+                        <h2 class='text-xl font-semibold'>Course Info</h2>
+
+                        <div class='mt-4'>
+                            <strong>Instructor:</strong> <?php echo $singleCourse['teacher'] ?>
                         </div>
-                        <div class="mt-2">
-                            <strong>Level:</strong> Intermediate
+                        <div class='mt-2'>
+                            <strong>Tags:</strong> <?php echo $singleCourse['course_tags'] ?>
                         </div>
-                        <div class="mt-2">
-                            <strong>Students Enrolled:</strong> 3.1k
+                        <div class='mt-2'>
+                            <strong>Category:</strong> <?php echo $singleCourse['course_category'] ?>
                         </div>
-                        <div class="mt-2">
-                            <strong>Rating:</strong> 4.9/5
-                        </div>
-                        <div class="mt-4">
-                            <h3 class="font-semibold">Related Courses</h3>
-                            <ul class="list-disc pl-5 mt-2">
-                                <li><a href="#" class="text-yellow-500 hover:underline">JavaScript Fundamentals</a></li>
-                                <li><a href="#" class="text-yellow-500 hover:underline">React Development</a></li>
-                                <li><a href="#" class="text-yellow-500 hover:underline">Node.js Backend Essentials</a></li>
-                            </ul>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
     <!--====== COURSE DETAILS PART ENDS ======-->
+
 
     <!--====== FOOTER PART START ======-->
     <footer class="bg-gray-800 text-white pt-10">
         <div class="container mx-auto text-center">
-            <p class="mb-2">Designed and Developed by <a href="https://github.com/Maroualab/Youdemy" class="text-yellow-400 hover:underline">Maroua Labballi</a></p>
+            <p class="mb-2">Designed and Developed by <a href="https://github.com/Maroualab/Youdemy"
+                    class="text-yellow-400 hover:underline">Maroua Labballi</a></p>
             <p>&copy; 2025 All rights reserved.</p>
         </div>
     </footer>
     <!--====== FOOTER PART ENDS ======-->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find all oembed tags
+            var oembeds = document.querySelectorAll('oembed');
+
+            oembeds.forEach(function (oembed) {
+                // Extract the URL from the oembed tag
+                var url = oembed.getAttribute('url');
+
+                // Check if it's a YouTube URL
+                if (url && url.includes('youtu.be')) {
+                    // Convert the shortened youtu.be URL to the full embed URL format
+                    var videoId = url.split('/').pop().split('?')[0]; // Get video ID
+                    url = 'https://www.youtube.com/embed/' + videoId;
+                }
+
+                if (url) {
+                    // Create an iframe element
+                    var iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    iframe.width = '560'; // You can adjust this
+                    iframe.height = '315'; // You can adjust this
+                    iframe.frameBorder = '0';
+                    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+
+                    // Replace the <oembed> tag with the iframe
+                    oembed.replaceWith(iframe);
+                }
+            });
+        });
+    </script>
 
 </body>
 

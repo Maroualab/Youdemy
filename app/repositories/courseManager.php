@@ -104,5 +104,42 @@ GROUP BY
 
         return $result;
     }
+
+
+    public function fetchSingleCourse($course_id,$teacher_id){
+        $sql = "SELECT 
+            c.id AS course_id,
+            c.title AS course_title,
+            c.img AS course_img,
+            c.content AS course_content,
+            c.description AS course_description,
+            GROUP_CONCAT(t.name) AS course_tags,
+            cat.name AS course_category,
+            u.username AS teacher
+        FROM 
+            Courses c 
+            JOIN 
+users u ON c.teacher_id=u.id
+        JOIN 
+            Categories cat ON c.category_id = cat.id
+        LEFT JOIN 
+            CourseTags ct ON c.id = ct.course_id
+        LEFT JOIN 
+            Tags t ON ct.tag_id = t.id
+        WHERE 
+            c.id = :course_id AND c.teacher_id = :teacher_id
+        GROUP BY 
+            c.id;
+        ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            'course_id' => $course_id,
+            'teacher_id' => $teacher_id
+        ]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }
 
