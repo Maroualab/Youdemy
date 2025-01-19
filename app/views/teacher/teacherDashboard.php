@@ -41,7 +41,7 @@ if (isset($_SESSION['error'])) {
     <link rel="shortcut icon" href="../../../assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../../../assets/css/animate.css">
     <link rel="stylesheet" href="../../../assets/css/LineIcons.2.0.css">
-    <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css">
+    <!-- <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css"> -->
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <!-- <link href="../../../public/src/output.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
@@ -418,21 +418,43 @@ if (isset($_SESSION['error'])) {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="../../../public/index.php">
-                    <img id="logo" src="../../../assets/images/logo.svg" alt="Logo">
-                </a>
-            </nav>
-            <div class="nav-links">
-                <a href="#add-course" id="addSection" class="active"><i class="fas fa-plus-circle"></i> Add Course</a>
-                <a href="#manage-courses" id="manageSection"><i class="fas fa-tasks"></i> Manage Courses</a>
-                <a href="#statistics" id="statisticsSection"><i class="fas fa-chart-bar"></i> Statistics</a>
-                <a href="#logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            </div>
+ <!--====== HEADER PART START ======-->
+ <header class="bg-white shadow">
+    <div class="container mx-auto px-4">
+        <nav class="flex items-center justify-between py-4">
+            <a class="navbar-brand" href="../../../public/index.php" aria-label="Homepage">
+                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo" class="h-10"> <!-- Add class to control logo size -->
+            </a>
+            <ul class="flex space-x-6">
+                <li>
+                    <a href="./teacherDashboard.php" id="addSection" class="flex items-center active">
+                        <i class="fas fa-plus-circle"></i> Add Course
+                    </a>
+                </li>
+                <li>
+                    <a href="./teacherDashboard.php" id="manageSection" class="flex items-center">
+                        <i class="fas fa-tasks"></i> Manage Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="./teacherDashboard.php" id="statisticsSection" class="flex items-center">
+                        <i class="fas fa-chart-bar"></i> Statistics
+                    </a>
+                </li>
+                <li>
+                    <a href="../../controllers/logout.php" aria-label="Logout">
+                        <button class="font-semibold text-red-600 bg-white  hover:bg-red-50 hover:text-red-700 transition duration-300 ease-in-out">
+                            Logout
+                        </button>
+                    </a>
+                </li>
+            </ul>
         </nav>
-    </header>
+    </div>
+</header>
+
+
+    <!--====== HEADER PART ENDS ======-->
 
 
     <main class="dashboard-main">
@@ -565,7 +587,7 @@ if (isset($_SESSION['error'])) {
                 <div id="course-list" class="row mb-30">
                     <!-- Existing Course -->
                     <?php
-                    print_r($coursecatalog);
+                    // print_r($coursecatalog);
                     foreach ($coursecatalog as $displaycourse) {
                         echo "
                     <div class='col-xl-4 col-lg-4 col-md-6'>

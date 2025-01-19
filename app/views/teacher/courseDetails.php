@@ -55,30 +55,89 @@ if (isset($_GET['course_id'])) {
             border-radius: 50%;
             object-fit: cover;
         }
+
+        .navbar {
+            background-color: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3498db;
+            background-color: #f8f9fa;
+        }
+
     </style>
 </head>
 
 <body>
     <!--====== HEADER PART START ======-->
     <header class="bg-white shadow">
-        <div class="container mx-auto px-4 ">
-            <nav class="flex items-center justify-between py-4">
-                <a class="font-bold text-2xl text-yellow-500" href="../../../public/index.php">Course Logo</a>
-                <ul class="flex space-x-6">
-                    <li><a href="../../../public/index.php" class="hover:text-yellow-500">Home</a></li>
-                    <li><a href="./coursesCatalog.php" class="hover:text-yellow-500">Course Catalog</a></li>
-                    <li><a href="#blog" class="hover:text-yellow-500">Blog</a></li>
-                    <li><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div class="container mx-auto px-4">
+        <nav class="flex items-center justify-between py-4">
+            <a class="navbar-brand" href="../../../public/index.php" aria-label="Homepage">
+                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo" class="h-10"> <!-- Add class to control logo size -->
+            </a>
+            <ul class="flex space-x-6">
+                <li>
+                    <a href="./teacherDashboard.php" id="addSection" class="flex items-center active">
+                        <i class="fas fa-plus-circle"></i> Add Course
+                    </a>
+                </li>
+                <li>
+                    <a href="./teacherDashboard.php" id="manageSection" class="flex items-center">
+                        <i class="fas fa-tasks"></i> Manage Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="./teacherDashboard.php" id="statisticsSection" class="flex items-center">
+                        <i class="fas fa-chart-bar"></i> Statistics
+                    </a>
+                </li>
+                <li>
+                    <a href="../../controllers/logout.php" aria-label="Logout">
+                        <button class="font-semibold text-red-600 bg-white  hover:bg-red-50 hover:text-red-700 transition duration-300 ease-in-out">
+                            Logout
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
     <!--====== HEADER PART ENDS ======-->
 
     <!--====== HERO PART START ======-->
-    <?php
-    print_r($singleCourse);
-    ?>
+    <!-- <?php
+    // print_r($singleCourse);
+    ?> -->
 
     <section class="hero h-64 flex flex-col items-center justify-center relative"
         style="background-image: url('/website/assets/images/courseBanners/<?php echo htmlspecialchars($singleCourse['course_img']); ?>');">
