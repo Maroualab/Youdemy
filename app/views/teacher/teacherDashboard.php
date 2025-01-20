@@ -457,10 +457,7 @@ if (isset($_SESSION['error'])) {
             <!-- <h2><i class="fas fa-plus-circle"></i> Add New Course</h2> -->
 
 
-
-            <form id="newCourseForm" class="course-form" action="../../controllers/CourseControllers.php" method="POST"
-                enctype="multipart/form-data">
-
+            <form id="newCourseForm" class="course-form" action="../../controllers/CourseControllers.php" method="POST" enctype="multipart/form-data">
 
                 <div class="form-group content-upload-section">
                     <label>Course Content</label>
@@ -476,7 +473,6 @@ if (isset($_SESSION['error'])) {
                         </div>
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <label for="courseTitle">Course Title</label>
@@ -633,34 +629,40 @@ if (isset($_SESSION['error'])) {
         <section id="statistics" class="dashboard-section" style="display: none;">
             <h2><i class="fas fa-chart-bar"></i> Course Statistics</h2>
             <div class="stats-grid">
-                <div class="stat-card">
-                    <i class="fas fa-book-open"></i>
-                    <div class="stat-info">
-                        <h3>Total Courses</h3>
-                        <p id="totalCourses">0</p>
-                    </div>
+            <div class="stat-card">
+                <i class="fas fa-book-open"></i>
+                <div class="stat-info">
+                <h3>Total Courses</h3>
+                <p id="totalCourses">
+                    
+                    
+                    <?php 
+                // echo count($coursecatalog);
+                include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
+                $totalCourses = new CourseStats();
+                 print_r ($totalCourses ->calculate($teacher_id));
+                 ?></p>
+
+
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <div class="stat-info">
-                        <h3>Total Students</h3>
-                        <p id="totalStudents">0</p>
-                    </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                <h3>Total Students</h3>
+                <p id="totalStudents">
+
+                    <?php
+                    include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
+                    $totalStudents = new StudentStats();
+                    echo ($totalStudents->calculate($teacher_id));
+                    ?>
+
+
+
+                </p>
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-star"></i>
-                    <div class="stat-info">
-                        <h3>Average Rating</h3>
-                        <p id="averageRating">0.0</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-certificate"></i>
-                    <div class="stat-info">
-                        <h3>Course Completions</h3>
-                        <p id="courseCompletions">0</p>
-                    </div>
-                </div>
+            </div>
             </div>
         </section>
 

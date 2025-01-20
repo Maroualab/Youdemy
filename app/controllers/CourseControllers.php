@@ -18,9 +18,9 @@ if( isset($_POST['submit'])){
     $tags = $_POST['tags'];
     $image = $_FILES['img'];
 
-    if (empty($_POST['content']) || empty($_POST['tags'])) {
+    if (empty($_POST['content']) || empty($_POST['tags']) || empty($_FILES['img'])) {
 
-        $_SESSION['error'] = 'No course content or tags provided!';
+        $_SESSION['error'] = 'No course content or tags or image provided!';
         header("Location: ../views/teacher/teacherDashboard.php");
     exit();
     } 
