@@ -30,10 +30,7 @@
 
     <main class="container text-center pt-5">
         <h1 class="mb-4">Account Verification Required</h1>
-        <p class="lead">It looks like your teacher account is not verified yet. Please check your email for a verification link.</p>
-        <p>If you haven't received the email, click the button below to resend it:</p>
-        <button class="btn btn-primary mb-3" onclick="resendVerification()">Resend Verification Email</button>
-        <p>If you're experiencing issues, please <a href="contact.html">contact support</a> for assistance.</p>
+        <p class="lead">It looks like your teacher account is not verified yet. Please wait for admin to approve you.</p>
     </main>
 
     <footer class="footer-area pt-4">
@@ -44,13 +41,7 @@
         </div>
     </footer>
 
-    <script>
-        function resendVerification() {
-            // Simulate a call to resend the verification email
-            alert('Verification email has been resent. Please check your inbox!');
-            // In a real application, you would perform an AJAX request here.
-        }
-    </script>
+
 </body>
 
 </html>

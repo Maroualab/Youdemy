@@ -1,15 +1,17 @@
 <?php
 session_start();
-$teacher_id = $_SESSION['teacher_id'];
+$student_id = $_SESSION['student_id'];
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
 if (isset($_GET['course_id'])) {
 
     $course_id = $_GET['course_id'];
     $singleCourse = new CourseManager();
-    $singleCourse = $singleCourse->fetchSingleCourse($course_id, $teacher_id);
+    $singleCourse = $singleCourse->fetchSingleCourseByCourseId($course_id);
 
 }
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -103,22 +105,12 @@ if (isset($_GET['course_id'])) {
     <div class="container mx-auto px-4">
         <nav class="flex items-center justify-between py-4">
             <a class="navbar-brand" href="../../../public/index.php" aria-label="Homepage">
-                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo" class="h-10"> <!-- Add class to control logo size -->
+                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo" class="h-10"> 
             </a>
             <ul class="flex space-x-6">
                 <li>
-                    <a href="./teacherDashboard.php" id="addSection" class="flex items-center active">
-                        <i class="fas fa-plus-circle"></i> Add Course
-                    </a>
-                </li>
-                <li>
-                    <a href="./teacherDashboard.php" id="manageSection" class="flex items-center">
-                        <i class="fas fa-tasks"></i> Manage Courses
-                    </a>
-                </li>
-                <li>
-                    <a href="./teacherDashboard.php" id="statisticsSection" class="flex items-center">
-                        <i class="fas fa-chart-bar"></i> Statistics
+                    <a href="./myCourses.php" id="myCourses" class="flex items-center active">
+                        </i>My courses
                     </a>
                 </li>
                 <li>
@@ -165,11 +157,8 @@ if (isset($_GET['course_id'])) {
                     <p class='mt-4'><?php echo $singleCourse['course_content'] ?></p>
 
 
+                    <a href="../../controllers/enrollementController.php?course_id=<?php echo $singleCourse['course_id']; ?>&student_id=<?php echo $student_id; ?>" class="main-btn mt-4 bg-blue-500 text-white p-2 rounded">Enroll for Free</a>
 
-
-
-
-                    <!-- <a href='#' class='main-btn mt-4 bg-blue-500 text-white p-2 rounded'>Enroll for Free</a> -->
                 </div>
 
                 <div class='lg:w-1/3 lg:ml-10'>

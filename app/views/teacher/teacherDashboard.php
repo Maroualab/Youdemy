@@ -41,7 +41,7 @@ if (isset($_SESSION['error'])) {
     <link rel="shortcut icon" href="../../../assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../../../assets/css/animate.css">
     <link rel="stylesheet" href="../../../assets/css/LineIcons.2.0.css">
-    <!-- <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css"> -->
+    <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css">
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <!-- <link href="../../../public/src/output.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
@@ -410,11 +410,6 @@ if (isset($_SESSION['error'])) {
         }
     </style>
 
-    <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="../../../assets/images/favicon.png" type="image/png">
-
-    <!--====== Bootstrap CSS ======-->
-    <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css">
 </head>
 
 <body>
@@ -427,17 +422,17 @@ if (isset($_SESSION['error'])) {
             </a>
             <ul class="flex space-x-6">
                 <li>
-                    <a href="./teacherDashboard.php" id="addSection" class="flex items-center active">
+                    <a href="#add-course" id="addSection" class="flex items-center active">
                         <i class="fas fa-plus-circle"></i> Add Course
                     </a>
                 </li>
                 <li>
-                    <a href="./teacherDashboard.php" id="manageSection" class="flex items-center">
+                    <a href="#manage-courses" id="manageSection" class="flex items-center">
                         <i class="fas fa-tasks"></i> Manage Courses
                     </a>
                 </li>
                 <li>
-                    <a href="./teacherDashboard.php" id="statisticsSection" class="flex items-center">
+                    <a href="#statistics" id="statisticsSection" class="flex items-center">
                         <i class="fas fa-chart-bar"></i> Statistics
                     </a>
                 </li>

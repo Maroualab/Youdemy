@@ -49,7 +49,7 @@ class AccountManager {
             header("Location: ../views/teacher/teacherDashboard.php");
         } elseif ($user['role'] === 'Student') {
             $_SESSION['student_id'] = $user['id'];
-            header("Location: ../views/courses/coursesCatalog.php");
+            header("Location: ../views/student/studentHomepage.php");
         } elseif ($user['role'] === 'Admin') {
             header("Location: ../views/admin/adminDashboard.php");
         }

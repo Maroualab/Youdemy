@@ -141,5 +141,70 @@ users u ON c.teacher_id=u.id
 
         return $result;
     }
+
+    public function fetchAllCourses(){
+        $sql = "SELECT 
+            c.id AS course_id,
+            c.title AS course_title,
+            c.img AS course_img,
+            c.content AS course_content,
+            c.description AS course_description,
+            GROUP_CONCAT(t.name) AS course_tags,
+            cat.name AS course_category,
+            u.username AS teacher
+        FROM 
+            Courses c
+        JOIN 
+            Categories cat ON c.category_id = cat.id
+        LEFT JOIN 
+            CourseTags ct ON c.id = ct.course_id
+        LEFT JOIN 
+            Tags t ON ct.tag_id = t.id
+        JOIN 
+            Users u ON c.teacher_id = u.id
+        GROUP BY 
+            c.id;
+        ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function fetchSingleCourseByCourseId($course_id){
+        $sql = "SELECT 
+            c.id AS course_id,
+            c.title AS course_title,
+            c.img AS course_img,
+            c.content AS course_content,
+            c.description AS course_description,
+            GROUP_CONCAT(t.name) AS course_tags,
+            cat.name AS course_category,
+            u.username AS teacher
+        FROM 
+            Courses c
+        JOIN 
+            Categories cat ON c.category_id = cat.id
+        LEFT JOIN 
+            CourseTags ct ON c.id = ct.course_id
+        LEFT JOIN 
+            Tags t ON ct.tag_id = t.id
+        JOIN 
+            Users u ON c.teacher_id = u.id
+        WHERE 
+            c.id = :course_id
+        GROUP BY 
+            c.id;
+        ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['course_id' => $course_id]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+
+    }
 }
 
