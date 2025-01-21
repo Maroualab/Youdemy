@@ -1,4 +1,8 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/UsersControllers.php';
+
+global $teacherDisplay;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +85,7 @@
 
         <!-- Content Management Section -->
         <section id="teacher-management" class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Content Management</h2>
+            <h2 class="text-2xl font-semibold mb-4">Teacher Management</h2>
 
 
             <!-- Manage Courses -->
@@ -90,26 +94,28 @@
                 <table class="min-w-full border-collapse shadow-lg">
                     <thead>
                         <tr class="bg-yellow-500 text-white">
-                            <th class="py-3 px-4 border border-gray-300">ID</th>
-                            <th class="py-3 px-4 border border-gray-300">Title</th>
+                            <th class="py-3 px-4 border border-gray-300">Teacher</th>
                             <th class="py-3 px-4 border border-gray-300">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="hover:bg-gray-100 transition">
-                            <td class="border border-gray-300 px-4 py-2">101</td>
-                            <td class="border border-gray-300 px-4 py-2">Introduction to PHP</td>
-                            <td class="border border-gray-300 px-4 py-2">
-                                <select
-                                    class="border p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300">
-                                    <option>Publish</option>
-                                    <option>Unpublish</option>
-                                    <option>Delete</option>
-                                </select>
+                        <?php 
+
+print_r($teacherDisplay);
+foreach($teacherDisplay as $teacher){
+    echo "
+                        <tr class='hover:bg-gray-100 transition'>
+                            <td class='border border-gray-300 px-4 py-2'>$teacher[username]</td>
+                            <td class='border border-gray-300 px-4 py-2'>
                                 <button
-                                    class="ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition">Submit</button>
+                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Approve</button>
+
+                                <button
+                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Reject</button>
                             </td>
                         </tr>
+
+                  "  ;}?>
                     </tbody>
                 </table>
             </div>
@@ -121,12 +127,12 @@
 
         <!-- Content Management Section -->
         <section id="teacher-management" class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Content Management</h2>
+            <h2 class="text-2xl font-semibold mb-4">Course Management</h2>
 
 
             <!-- Manage Courses -->
             <div>
-                <h3 class="text-xl mb-2">Validate Teachers</h3>
+                <h3 class="text-xl mb-2">Validate Course</h3>
                 <table class="min-w-full border-collapse shadow-lg">
                     <thead>
                         <tr class="bg-yellow-500 text-white">
@@ -140,12 +146,9 @@
                             <td class="border border-gray-300 px-4 py-2">101</td>
                             <td class="border border-gray-300 px-4 py-2">Introduction to PHP</td>
                             <td class="border border-gray-300 px-4 py-2">
-                                <select
-                                    class="border p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300">
-                                    <option>Publish</option>
-                                    <option>Unpublish</option>
-                                    <option>Delete</option>
-                                </select>
+                                <button
+                                    class="ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition">Submit</button>
+
                                 <button
                                     class="ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition">Submit</button>
                             </td>

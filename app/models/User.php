@@ -10,7 +10,7 @@ class User
     private $role;
     protected $conn;
 
-    public function __construct($username , $email , $password , $role )
+    public function __construct($username , $email , $password , $role)
     {
         $this->conn = Database::getConnection();
             $this->username = $username;
@@ -70,6 +70,17 @@ class User
     }
 
  
+}
+
+class Teacher extends User
+{
+    public static function getPendingTeachers()
+    {
+        $sql = "SELECT * FROM users WHERE role = 'teacher' AND status = 'pending'";
+        $stmt = Database::getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 
