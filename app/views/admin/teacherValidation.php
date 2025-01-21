@@ -153,6 +153,7 @@ global $pendingCourses;
                         <tr class="bg-yellow-500 text-white">
                             <th class="py-3 px-4 border border-gray-300">Img</th>
                             <th class="py-3 px-4 border border-gray-300">Title</th>
+                            <th class="py-3 px-4 border border-gray-300">Status</th>
                             <th class="py-3 px-4 border border-gray-300">Actions</th>
                         </tr>
                     </thead>
@@ -168,18 +169,19 @@ global $pendingCourses;
                                 </a>
                             </td>
                              <td class='border border-gray-300 px-4 py-2'> <a href='./courseDetails.php?course_id=$pendingCourse[id]'>
-
                            <span>$pendingCourse[title]</span> </a></td>
+                             <td class='border border-gray-300 px-4 py-2'> 
+                           $pendingCourse[status]</td>
                              <td class='border border-gray-300 px-4 py-2'>
         <!-- Approve Button -->
-        <a href='/website/app/controllers/teacherUpdate.php?id=$pendingCourse[id]&status=pending&approve'>
+        <a href='/website/app/controllers/approveCourses.php?id=$pendingCourse[id]&status=$pendingCourse[status]&approve'>
             <button name='approve' value='approve' class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>
                 Approve
             </button>
         </a>
         
         <!-- Reject Button -->
-        <a href='/website/app/controllers/teacherUpdate.php?id=$pendingCourse[id]&status=pending&reject'>
+        <a href='/website/app/controllers/approveCourses.php?id=$pendingCourse[id]&status=$pendingCourse[status]&reject'>
             <button name='reject' value='reject' class='ml-2 bg-red-600 text-white py-1 px-2 rounded-md hover:bg-red-700 transition'>
                 Reject
             </button>

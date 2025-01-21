@@ -207,7 +207,7 @@ users u ON c.teacher_id=u.id
 
     }
     public function fetchPendingCourses() {
-        $sql = "SELECT * FROM courses WHERE status = 'pending'";
+        $sql = "SELECT * FROM courses WHERE status != 'approved'";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -215,7 +215,15 @@ users u ON c.teacher_id=u.id
         return $result;
     }
     
-    
+    public function updateStatus($id,$status){
+
+        $sql ="UPDATE courses SET status=:status WHERE id=:id";
+        $stmt= $this->conn->prepare($sql);
+        $stmt->execute([
+            "status"=>$status,
+            "id"=>$id
+        ]);
+    }
 
 
 }

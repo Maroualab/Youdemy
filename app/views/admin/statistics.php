@@ -1,6 +1,13 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/UsersControllers.php';
-global $users;
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
+$coursecatalog = new CourseManager();
+$coursecatalog = $coursecatalog->fetchAllCourses();
+
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CategoryControllers.php';
+$categories = CategoryManager::fetchAllCategories();
+global $categories;
 
 ?>
 <!DOCTYPE html>
@@ -79,8 +86,9 @@ global $users;
  <section id="statistics" class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Global Statistics</h2>
             <div class="space-y-4">
-                <p>Total Courses: <strong>20</strong></p>
-                <p>Categories: <strong>5</strong></p>
+                <p>Total Courses: <strong> <?php echo count($coursecatalog);?>
+                </strong></p>
+                <p>Categories: <strong><?php echo count($categories);?></strong></p>
                 <h3 class="mt-4">Most Enrolled Course:</h3>
                 <p><strong>Understanding JavaScript</strong></p>
                 <h3>Top 3 Instructors:</h3>
