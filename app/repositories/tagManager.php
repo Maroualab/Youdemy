@@ -12,7 +12,6 @@ class TagManager {
     }
 
     public static function fetchAllTags() {
-        // Create an instance of TagManager to access the connection
         $instance = new self();
         $sql = "SELECT * FROM tags";
         $stmt = $instance->conn->prepare($sql);
@@ -26,13 +25,6 @@ class TagManager {
         $sql = "DELETE FROM tags WHERE id = :id";
         $stmt = $instance->conn->prepare($sql);
         return $stmt->execute(['id' => $id]);
-    }
-
-    public static function updateTag($id, $name) {
-        $instance = new self();
-        $sql = "UPDATE tags SET name = :name WHERE id = :id";
-        $stmt = $instance->conn->prepare($sql);
-        return $stmt->execute(['name' => $name, 'id' => $id]);
     }
 
 

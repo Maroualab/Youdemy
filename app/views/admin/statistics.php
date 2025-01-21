@@ -44,13 +44,13 @@ global $users;
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
                         <!-- Navigation links -->
-                        <a href="#user-management"
+                        <a href="./adminDashboard.php"
                             class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
                         <a href="./TeacherValidation.php"
                             class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
                         <a href="./TagCategory.php"
                             class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
-                        <a href="./statistics.php"
+                        <a href="#statistics"
                             class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
                         <a href="../../controllers/logout.php"
                             class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
@@ -62,10 +62,10 @@ global $users;
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="sm:hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="#user-management" class="text-white block px-3 py-2 rounded-md text-base">User Management</a>
+                <a href="./adminDashboard.php" class="text-white block px-3 py-2 rounded-md text-base">User Management</a>
                 <a href="./TeacherValidation.php" class="text-white block px-3 py-2 rounded-md text-base">Teacher Management</a>
                 <a href="./TagCategory.php" class="text-white block px-3 py-2 rounded-md text-base">Tag & Category Management</a>
-                <a href="./statistics.php" class="text-white block px-3 py-2 rounded-md text-base">Statistics</a>
+                <a href="#statistics" class="text-white block px-3 py-2 rounded-md text-base">Statistics</a>
                 <a href="../../controllers/logout.php"
                     class="text-white block px-3 py-2 rounded-md text-base">Logout</a>
             </div>
@@ -75,49 +75,22 @@ global $users;
     <!-- Main Content -->
     <main class="container mx-auto my-6 p-6 bg-white rounded-lg shadow-md">
 
-        <!-- User Management Section -->
-        <section id="user-management" class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4">User Management</h2>
-            <table class="min-w-full border-collapse shadow-lg">
-                <thead>
-                    <tr class="bg-yellow-500 text-white">
-                        <th class="py-3 px-4 border border-gray-300">Name</th>
-                        <th class="py-3 px-4 border border-gray-300">Email</th>
-                        <th class="py-3 px-4 border border-gray-300">Role</th>
-                        <th class="py-3 px-4 border border-gray-300">Status</th>
-                        <th class="py-3 px-4 border border-gray-300">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php foreach ($users as $user) {
-                        echo "
-                <tr class='hover:bg-gray-100 transition'>
-                    <td class='border border-gray-300 px-4 py-2'>{$user['username']}</td>
-                    <td class='border border-gray-300 px-4 py-2'>{$user['email']}</td>
-                    <td class='border border-gray-300 px-4 py-2'>{$user['role']}</td>
-                    <td class='border border-gray-300 px-4 py-2'>{$user['status']}</td>
-                    <td class='border border-gray-300 px-4 py-2'>
-                    <div class='flex justify-around'>
-                    <a href='/website/app/controllers/userUpdate.php?id=$user[id]&status=$user[status]'><button class='mr-4' title='Edit'>
-                        <button class='btn btn-warning btn-sm'>Edit</button>
-                    </a>
-                    <a href='/website/app/controllers/userUpdate.php?id=$user[id]&role=$user[role]'><button class='mr-4' title='Edit'>
-                        <button class='btn btn-danger btn-sm'>Delete</button>
-                    </a>
-                    </div>
-                    </td>
-                </tr>
-    ";
-                    } ?>
-
-
-                </tbody>
-            </table>
-        </section>
-
-       
-    </main>
+         <!-- Statistics Section -->
+ <section id="statistics" class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Global Statistics</h2>
+            <div class="space-y-4">
+                <p>Total Courses: <strong>20</strong></p>
+                <p>Categories: <strong>5</strong></p>
+                <h3 class="mt-4">Most Enrolled Course:</h3>
+                <p><strong>Understanding JavaScript</strong></p>
+                <h3>Top 3 Instructors:</h3>
+                <ul class="list-disc pl-5">
+                    <li>Alice Johnson</li>
+                    <li>Bob Williams</li>
+                    <li>Charlie Brown</li>
+                </ul>
+            </div>
+        </section>    </main>
 
     <script>
         // Toggle the mobile menu

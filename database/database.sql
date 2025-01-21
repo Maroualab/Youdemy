@@ -53,6 +53,7 @@ CREATE TABLE Courses (
     category_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     img VARCHAR(255) NOT NULL,
+    ADD COLUMN status ENUM('pending','approved','rejected') DEFAULT 'pending' ,
     FOREIGN KEY (teacher_id) REFERENCES Users(id),
     FOREIGN KEY (category_id) REFERENCES Categories(id)
 );

@@ -30,11 +30,5 @@ class CategoryManager{
 
 
 
-    public static function updateCategory($id, $name) {
-        $instance = new self();
-
-        $sql = "UPDATE categories SET name = :name WHERE id = :id";
-        $stmt = $instance->conn->prepare($sql);
-        return $stmt->execute(['id' => $id, 'name' => $name]);
-    }
+  
 }
