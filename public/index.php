@@ -61,7 +61,7 @@
 				<div class="row align-items-center">
 					<div class="col-xl-12">
 						<nav class="navbar navbar-expand-lg">
-							<a class="navbar-brand" href="index.html">
+							<a class="navbar-brand" href="#">
 								<img id="logo" src="../assets/images/logo.svg" alt="Logo">
 							</a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -628,7 +628,7 @@
 			<div class="row">
 				<div class="col-xl-3 col-lg-3 col-md-6">
 					<div class="footer-widget">
-						<a href="index.html" class="logo d-blok">
+						<a href="#" class="logo d-blok">
 							<img src="../assets/images/logo.svg" alt="">
 						</a>
 						<p>Lorem ipsum dolor sit amco nsetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna .</p>

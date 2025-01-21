@@ -1,7 +1,7 @@
 <?php
-session_start(); // Always start the session first
-session_unset(); // Unset all session variables
-session_destroy(); // Destroy the session
+session_start(); 
+session_unset(); 
+session_destroy(); 
 
 header("Location: ../../public/index.php");
 exit();

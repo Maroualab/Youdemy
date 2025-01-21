@@ -22,7 +22,7 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
     <link rel="stylesheet" href="../../../assets/css/bootstrap-5.0.5-alpha.min.css">
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link href="../../../public/src/output.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 
 
     <style>
@@ -39,46 +39,29 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
 
 <body>
     <!--====== HEADER PART START ======-->
-    <header class="header_area">
-        <div id="header_navbar" class="header_navbar">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-12">
-                        <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="../../../public/index.php">
-                                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo">
-                            </a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                                <ul id="nav" class="navbar-nav ml-auto">
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="../../../public/index.php">Home</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="./coursesCatalog.php">Course Catalog</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#blog">Blog</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#contact">Contact</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="header-btn btn-hover" href="#courses">Get Started</a>
-                                    </li>
-                                </ul>
-                            </div> <!-- navbar collapse -->
-                        </nav> <!-- navbar -->
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- header navbar -->
-    </header>
+    <header class="bg-white shadow">
+    <div class="container mx-auto px-4">
+        <nav class="flex items-center justify-between py-4">
+            <a class="navbar-brand" href="../../../public/index.php" aria-label="Homepage">
+                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo" class="h-10"> 
+            </a>
+            <ul class="flex space-x-6">
+                <li>
+                    <a href="./studentHomepage.php" id="myCourses" class="flex items-center active">
+                        </i>courses
+                    </a>
+                </li>
+                <li>
+                    <a href="../../controllers/logout.php" aria-label="Logout">
+                        <button class="font-semibold text-red-600 bg-white  hover:bg-red-50 hover:text-red-700 transition duration-300 ease-in-out">
+                            Logout
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
     <!--====== HEADER PART ENDS ======-->
 
     <!--====== CATALOG PART START ======-->

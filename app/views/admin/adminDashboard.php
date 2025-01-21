@@ -1,3 +1,8 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/UsersControllers.php';
+global $users;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +66,6 @@
         <table class="min-w-full border-collapse shadow-lg">
             <thead>
                 <tr class="bg-yellow-500 text-white">
-                    <!-- <th class="py-3 px-4 border border-gray-300">ID</th> -->
                     <th class="py-3 px-4 border border-gray-300">Name</th>
                     <th class="py-3 px-4 border border-gray-300">Email</th>
                     <th class="py-3 px-4 border border-gray-300">Role</th>
@@ -70,23 +74,24 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Example Data (Dynamic Content Expected) -->
-                <tr class="hover:bg-gray-100 transition">
-                    <!-- <td class="border border-gray-300 px-4 py-2">1</td> -->
-                    <td class="border border-gray-300 px-4 py-2">John Doe</td>
-                    <td class="border border-gray-300 px-4 py-2">john@example.com</td>
-                    <td class="border border-gray-300 px-4 py-2">teacher</td>
-                    <td class="border border-gray-300 px-4 py-2">Active</td>
-                    <td class="border border-gray-300 px-4 py-2">
                 
-                    <div class="flex justify-around">
-                        <button class="w-full  ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition">activate/disactivate</button>
-                        <button class="w-full  ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition">Submit</button>
+<?php foreach($users as $user){
+    echo "
+    <tr class='hover:bg-gray-100 transition'>
+                    <td class='border border-gray-300 px-4 py-2'>{$user['username']}</td>
+                    <td class='border border-gray-300 px-4 py-2'>{$user['email']}</td>
+                    <td class='border border-gray-300 px-4 py-2'>{$user['role']}</td>
+                    <td class='border border-gray-300 px-4 py-2'>{$user['status']}</td>
+                    <td class='border border-gray-300 px-4 py-2'>
+                    <div class='flex justify-around'>
+                        <button class='w-full  ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>activate/disactivate</button>
+                        <button class='w-full  ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Submit</button>
                     </div>
-
                     </td>
-
                 </tr>
+    ";
+} ?>
+                    
                 
             </tbody>
         </table>
