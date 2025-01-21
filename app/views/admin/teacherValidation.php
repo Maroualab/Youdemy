@@ -6,6 +6,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CourseControl
 global $pendingCourses;
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,25 +99,34 @@ global $pendingCourses;
                     <thead>
                         <tr class="bg-yellow-500 text-white">
                             <th class="py-3 px-4 border border-gray-300">Teacher</th>
+                            <th class="py-3 px-4 border border-gray-300">Status</th>
                             <th class="py-3 px-4 border border-gray-300">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
 
-                        print_r($teacherDisplay);
+                        // print_r($teacherDisplay);
                         foreach ($teacherDisplay as $teacher) {
                             echo "
                         <tr class='hover:bg-gray-100 transition'>
                             <td class='border border-gray-300 px-4 py-2'>$teacher[username]</td>
+                            <td class='border border-gray-300 px-4 py-2'>$teacher[status]</td>
                             <td class='border border-gray-300 px-4 py-2'>
-                                <a href='/website/app/controllers/teacherUpdate.php?id=$teacher[id]&status=$teacher[status]'>
-                            <button
-                                    name='approve' value='approve' class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Approve</button>
-</a>
-                                <button
-                                   name='reject' value ='reject'class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Reject</button>
-                            </td>
+        <!-- Approve Button -->
+        <a href='/website/app/controllers/teacherUpdate.php?id=$teacher[id]&status=pending&approve'>
+            <button name='approve' value='approve' class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>
+                Approve
+            </button>
+        </a>
+        
+        <!-- Reject Button -->
+        <a href='/website/app/controllers/teacherUpdate.php?id=$teacher[id]&status=pending&reject'>
+            <button name='reject' value='reject' class='ml-2 bg-red-600 text-white py-1 px-2 rounded-md hover:bg-red-700 transition'>
+                Reject
+            </button>
+        </a>
+    </td>
                         </tr>
 
                   ";
@@ -160,13 +170,21 @@ global $pendingCourses;
                              <td class='border border-gray-300 px-4 py-2'> <a href='./courseDetails.php?course_id=$pendingCourse[id]'>
 
                            <span>$pendingCourse[title]</span> </a></td>
-                            <td class='border border-gray-300 px-4 py-2'>
-                                <button
-                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Approve</button>
-
-                                <button
-                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Reject</button>
-                            </td>
+                             <td class='border border-gray-300 px-4 py-2'>
+        <!-- Approve Button -->
+        <a href='/website/app/controllers/teacherUpdate.php?id=$pendingCourse[id]&status=pending&approve'>
+            <button name='approve' value='approve' class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>
+                Approve
+            </button>
+        </a>
+        
+        <!-- Reject Button -->
+        <a href='/website/app/controllers/teacherUpdate.php?id=$pendingCourse[id]&status=pending&reject'>
+            <button name='reject' value='reject' class='ml-2 bg-red-600 text-white py-1 px-2 rounded-md hover:bg-red-700 transition'>
+                Reject
+            </button>
+        </a>
+    </td>
                         </tr>
                         
                         

@@ -76,7 +76,7 @@ class Teacher extends User
 {
     public static function getPendingTeachers()
     {
-        $sql = "SELECT * FROM users WHERE role = 'teacher' AND status = 'pending'";
+        $sql = "SELECT * FROM users WHERE role = 'teacher' AND status != 'active' ";
         $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

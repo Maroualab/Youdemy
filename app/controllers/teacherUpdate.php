@@ -3,27 +3,36 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/website/config/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/website/app/repositories/userManager.php'; 
 
-if(isset($_GET['approve'])){
-    $id=$_GET['id'];
+// Check if we are approving or rejecting a teacher
+if (isset($_GET['id']) && isset($_GET['status'])) {
 
-    if($status== 'pending'){
-        $status = 'active';
+    // Retrieve teacher id and the current status
+    $id = $_GET['id'];
+    $status = $_GET['status'];
+
+    // Approve action
+    if (isset($_GET['approve'])) {
+       
+            $status = 'active';  // Change status to active if approved
+        
     }
-    
+
+    // Reject action
+    elseif (isset($_GET['reject'])) {
+        
+            $status = 'suspended';  // Change status to suspended if rejected
+        
+    }
+
+    // Instantiate UserManager and update the status
     $updateStatus = new UserManager();
-    $updateStatus ->updateStatus($id,$status);
+    $updateStatus->updateStatus($id, $status);
 
-
-    header("Location: ../views/admin/adminDashboard.php");
-
-}elseif(isset($_GET['id'])&&isset($_GET['role'])){
-    $id=$_GET['id'];
-    $role=$_GET['role'];
-
-    $deleteUser = new UserManager();
-    $deleteUser->deleteUser($id , $role);
-
-
-    header("Location: ../views/admin/adminDashboard.php");
-
+    // Redirect to the Teacher Validation page after updating the status
+    header("Location: ../views/admin/TeacherValidation.php");
+    exit(); // Always use exit after header redirection to stop further script execution
+} else {
+    // If the necessary parameters are not passed, redirect to the validation page
+    header("Location: ../views/admin/TeacherValidation.php");
+    exit();
 }
