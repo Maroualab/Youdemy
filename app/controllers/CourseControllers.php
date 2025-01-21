@@ -1,6 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/website/config/database.php'; 
 require_once $_SERVER['DOCUMENT_ROOT'].'/website/app/repositories/courseManager.php'; 
+// require_once $_SERVER['DOCUMENT_ROOT'].'/website/app/models/Course.php'; 
+
 
 session_start();
 
@@ -37,6 +39,11 @@ if( isset($_POST['submit'])){
     header("Location: ../views/teacher/teacherDashboard.php");
     
 }
+
+
+$pendingCourses=new CourseManager();
+$pendingCourses = $pendingCourses->fetchPendingCourses();
+
 
 
 

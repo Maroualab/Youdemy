@@ -206,7 +206,14 @@ users u ON c.teacher_id=u.id
         return $result;
 
     }
+    public function fetchPendingCourses() {
+        $sql = "SELECT * FROM courses WHERE status = 'pending'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        return $result;
+    }
     
 }
 

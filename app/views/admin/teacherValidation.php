@@ -1,7 +1,10 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/UsersControllers.php';
-
 global $teacherDisplay;
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CourseControllers.php';
+global $pendingCourses;
+
 
 ?>
 <!DOCTYPE html>
@@ -99,23 +102,25 @@ global $teacherDisplay;
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
+                        <?php
 
-print_r($teacherDisplay);
-foreach($teacherDisplay as $teacher){
-    echo "
+                        print_r($teacherDisplay);
+                        foreach ($teacherDisplay as $teacher) {
+                            echo "
                         <tr class='hover:bg-gray-100 transition'>
                             <td class='border border-gray-300 px-4 py-2'>$teacher[username]</td>
                             <td class='border border-gray-300 px-4 py-2'>
+                                <a href='/website/app/controllers/teacherUpdate.php?id=$teacher[id]&status=$teacher[status]'>
+                            <button
+                                    name='approve' value='approve' class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Approve</button>
+</a>
                                 <button
-                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Approve</button>
-
-                                <button
-                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Reject</button>
+                                   name='reject' value ='reject'class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Reject</button>
                             </td>
                         </tr>
 
-                  "  ;}?>
+                  ";
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -136,23 +141,39 @@ foreach($teacherDisplay as $teacher){
                 <table class="min-w-full border-collapse shadow-lg">
                     <thead>
                         <tr class="bg-yellow-500 text-white">
-                            <th class="py-3 px-4 border border-gray-300">ID</th>
+                            <th class="py-3 px-4 border border-gray-300">Img</th>
                             <th class="py-3 px-4 border border-gray-300">Title</th>
                             <th class="py-3 px-4 border border-gray-300">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="hover:bg-gray-100 transition">
-                            <td class="border border-gray-300 px-4 py-2">101</td>
-                            <td class="border border-gray-300 px-4 py-2">Introduction to PHP</td>
-                            <td class="border border-gray-300 px-4 py-2">
+                        <?php
+                        // print_r($pendingCourses);
+                        foreach ($pendingCourses as $pendingCourse) {
+                            echo "
+                         <tr class='hover:bg-gray-100 transition'>
+                            <td class='border border-gray-300 px-4 py-2'>
+                             <a href='./courseDetails.php?course_id=$pendingCourse[id]'>
+                                    <img width=100 src='/website/assets/images/courseBanners/" . htmlspecialchars($pendingCourse['img']) . "' alt='course_picture'>
+                                </a>
+                            </td>
+                             <td class='border border-gray-300 px-4 py-2'> <a href='./courseDetails.php?course_id=$pendingCourse[id]'>
+
+                           <span>$pendingCourse[title]</span> </a></td>
+                            <td class='border border-gray-300 px-4 py-2'>
                                 <button
-                                    class="ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition">Submit</button>
+                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Approve</button>
 
                                 <button
-                                    class="ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition">Submit</button>
+                                    class='ml-2 bg-yellow-600 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition'>Reject</button>
                             </td>
                         </tr>
+                        
+                        
+                        ";
+                        }
+                        ?>
+
                     </tbody>
                 </table>
             </div>
