@@ -122,7 +122,7 @@ users u ON c.teacher_id=u.id
         LEFT JOIN 
             Tags t ON ct.tag_id = t.id
         WHERE 
-            c.id = :course_id AND c.teacher_id = :teacher_id
+            c.id = :course_id AND c.teacher_id = :teacher_id OR c.teacher_id IS NULL
         GROUP BY 
             c.id;
         ";
@@ -188,10 +188,10 @@ c.status = 'approved'
             CourseTags ct ON c.id = ct.course_id
         LEFT JOIN 
             Tags t ON ct.tag_id = t.id
-        JOIN 
+        LEFT JOIN 
             Users u ON c.teacher_id = u.id
         WHERE 
-            c.id = :course_id
+            c.id = :course_id 
         GROUP BY 
             c.id;
         ";
