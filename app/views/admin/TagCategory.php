@@ -42,7 +42,7 @@ global $categories;
                     </button>
                 </div>
                 <div class="flex items-center justify-center sm:justify-start">
-                    <a href="#" class="text-3xl font-semibold">Admin</a>
+                    <a href="#" class="text-3xl font-semibold no-underline">Admin</a>
                 </div>
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">

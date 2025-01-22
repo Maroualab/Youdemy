@@ -9,6 +9,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CategoryContr
 $categories = CategoryManager::fetchAllCategories();
 global $categories;
 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
+$TopTeachers = new AdminStats;
+$TopTeachers= $TopTeachers->calculateTopTeachers();
+global $TopTeachers;
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +53,7 @@ global $categories;
                     </button>
                 </div>
                 <div class="flex items-center justify-center sm:justify-start">
-                    <a href="#" class="text-3xl font-semibold">Admin</a>
+                    <a href="#" class="text-3xl font-semibold no-underline">Admin</a>
                 </div>
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
@@ -96,12 +103,23 @@ global $categories;
                     </strong></p>
                 <p>Categories: <strong><?php echo count($categories); ?></strong></p>
                 <h3 class="mt-4">Most Enrolled Course:</h3>
-                <p><strong>Understanding JavaScript</strong></p>
+                <p><strong>
+                        <?php
+                        include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
+                        $MostEnrolledCourseStats = new AdminStats;
+                        $MostEnrolledCourseStats= $MostEnrolledCourseStats->calculateBestCourse();
+                        echo $MostEnrolledCourseStats['title'] ;
+                         ?>
+                    </strong></p>
                 <h3>Top 3 Instructors:</h3>
                 <ul class="list-disc pl-5">
-                    <li>Alice Johnson</li>
-                    <li>Bob Williams</li>
-                    <li>Charlie Brown</li>
+                <?php
+                        foreach($TopTeachers as $TopTeacher){
+                            echo "
+                            <li>$TopTeacher[teacher_username]</li>
+                            ";
+                        }
+                         ?>
                 </ul>
             </div>
         </section>

@@ -108,11 +108,6 @@ if (isset($_GET['course_id'])) {
                     <h2 class='mt-8 text-3xl font-semibold'>Course Content</h2>
                     <p class='mt-4'><?php echo $singleCourse['course_content'] ?></p>
 
-
-
-
-
-
                     <!-- <a href='#' class='main-btn mt-4 bg-blue-500 text-white p-2 rounded'>Enroll for Free</a> -->
                 </div>
 
