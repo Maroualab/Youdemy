@@ -24,6 +24,8 @@ if (isset($_GET['course_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+
 
 
     <style>
@@ -137,10 +139,7 @@ if (isset($_GET['course_id'])) {
     <!--====== HEADER PART ENDS ======-->
 
     <!--====== HERO PART START ======-->
-    <!-- <?php
-    // print_r($singleCourse);
-    ?> -->
-
+  
     <section class="hero h-64 flex flex-col items-center justify-center relative"
         style="background-image: url('/website/assets/images/courseBanners/<?php echo htmlspecialchars($singleCourse['course_img']); ?>');">
         <div class="absolute inset-0 bg-black opacity-50"></div>
@@ -164,12 +163,6 @@ if (isset($_GET['course_id'])) {
                     <h2 class='mt-8 text-3xl font-semibold'>Course Content</h2>
                     <p class='mt-4'><?php echo $singleCourse['course_content'] ?></p>
 
-
-
-
-
-
-                    <!-- <a href='#' class='main-btn mt-4 bg-blue-500 text-white p-2 rounded'>Enroll for Free</a> -->
                 </div>
 
                 <div class='lg:w-1/3 lg:ml-10'>
@@ -206,38 +199,7 @@ if (isset($_GET['course_id'])) {
     </footer>
     <!--====== FOOTER PART ENDS ======-->
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Find all oembed tags
-            var oembeds = document.querySelectorAll('oembed');
-
-            oembeds.forEach(function (oembed) {
-                // Extract the URL from the oembed tag
-                var url = oembed.getAttribute('url');
-
-                // Check if it's a YouTube URL
-                if (url && url.includes('youtu.be')) {
-                    // Convert the shortened youtu.be URL to the full embed URL format
-                    var videoId = url.split('/').pop().split('?')[0]; // Get video ID
-                    url = 'https://www.youtube.com/embed/' + videoId;
-                }
-
-                if (url) {
-                    // Create an iframe element
-                    var iframe = document.createElement('iframe');
-                    iframe.src = url;
-                    iframe.width = '560'; // You can adjust this
-                    iframe.height = '315'; // You can adjust this
-                    iframe.frameBorder = '0';
-                    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-                    iframe.allowFullscreen = true;
-
-                    // Replace the <oembed> tag with the iframe
-                    oembed.replaceWith(iframe);
-                }
-            });
-        });
-    </script>
+ 
 
 </body>
 

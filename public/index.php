@@ -1,3 +1,11 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
+$coursecatalog = new CourseManager();
+$coursecatalog = $coursecatalog->fetchAllCourses();
+
+session_start();
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -29,8 +37,8 @@
 
 <body>
 	<!--[if IE]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
+	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
 
 	<!--====== PRELOADER PART START ======-->
 
@@ -64,8 +72,9 @@
 							<a class="navbar-brand" href="#">
 								<img id="logo" src="../assets/images/logo.svg" alt="Logo">
 							</a>
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-								aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<button class="navbar-toggler" type="button" data-toggle="collapse"
+								data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+								aria-expanded="false" aria-label="Toggle navigation">
 								<span class="toggler-icon"></span>
 								<span class="toggler-icon"></span>
 								<span class="toggler-icon"></span>
@@ -87,10 +96,24 @@
 									<li class="nav-item">
 										<a class="page-scroll" href="#contact">Contact</a>
 									</li>
-									<li class="nav-item" style="display:flex;gap:10px;">
-										<a class="header-btn btn-hover" href="/website/app/Views/auth/sign-up.php">Sign Up</a>
-										<a class="header-btn btn-hover" href="/website/app/Views/auth/login.php">Log In</a>
-									</li>
+
+									<ul class="navbar-nav ml-auto">
+										<?php if (isset($_SESSION['student_id'])): ?>
+											<!-- Display Log Out button if session student_id exists and matches user id -->
+											<li class="nav-item">
+												<a class="header-btn btn-hover"
+													href="/website/app/controllers/logout.php">Log Out</a>
+											</li>
+										<?php else: ?>
+											<!-- Display Sign Up and Log In buttons if session student_id does not exist or doesn't match user id -->
+											<li class="nav-item" style="display:flex;gap:10px;">
+												<a class="header-btn btn-hover"
+													href="/website/app/Views/auth/sign-up.php">Sign Up</a>
+												<a class="header-btn btn-hover" href="/website/app/Views/auth/login.php">Log
+													In</a>
+											</li>
+										<?php endif; ?>
+									</ul>
 								</ul>
 							</div> <!-- navbar collapse -->
 						</nav> <!-- navbar -->
@@ -108,8 +131,11 @@
 			<div class="row align-items-center">
 				<div class="col-xl-5 offset-xl-7 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
 					<div class="hero-content">
-						<h2 class="mb-30 wow fadeInUp" data-wow-delay=".2s">Education and Online Course Site Template</h2>
-						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam diam voluptua.</p>
+						<h2 class="mb-30 wow fadeInUp" data-wow-delay=".2s">Education and Online Course Site Template
+						</h2>
+						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing
+							elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam diam
+							voluptua.</p>
 						<div class="hero-btns">
 							<a href="#courses" class="main-btn wow fadeInUp" data-wow-delay=".6s">Courses</a>
 						</div>
@@ -131,7 +157,8 @@
 				<div class="col-xl-6 col-lg-7 col-md-10 mx-auto">
 					<div class="section-title text-center">
 						<h2 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Learn New Skills</h2>
-						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt utlabo</p>
+						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing
+							elitr, sed diam nonumy eirmod tempor invidunt utlabo</p>
 					</div>
 				</div>
 			</div>
@@ -144,7 +171,7 @@
 						<div class="skill-content">
 							<h4>Learn Anything</h4>
 							<p>Lorem ipsum dolor sit amet, consetetu sadi
-							ps cinelitr, sed diam nonumy eirtem Lorem ipsum dolor sit amet, consetetur.</p>
+								ps cinelitr, sed diam nonumy eirtem Lorem ipsum dolor sit amet, consetetur.</p>
 						</div>
 					</div>
 				</div>
@@ -156,7 +183,7 @@
 						<div class="skill-content">
 							<h4>Large Collection</h4>
 							<p>Lorem ipsum dolor sit amet, consetetu sadi
-							ps cinelitr, sed diam nonumy eirtem Lorem ipsum dolor sit amet, consetetur.</p>
+								ps cinelitr, sed diam nonumy eirtem Lorem ipsum dolor sit amet, consetetur.</p>
 						</div>
 					</div>
 				</div>
@@ -168,7 +195,7 @@
 						<div class="skill-content">
 							<h4>Certified Instructors</h4>
 							<p>Lorem ipsum dolor sit amet, consetetu sadi
-							ps cinelitr, sed diam nonumy eirtem Lorem ipsum dolor sit amet, consetetur.</p>
+								ps cinelitr, sed diam nonumy eirtem Lorem ipsum dolor sit amet, consetetur.</p>
 						</div>
 					</div>
 				</div>
@@ -178,13 +205,14 @@
 	<!--====== SKILL PART ENDS ======-->
 
 	<!--====== COURSES PART START ======-->
-	<section id="courses" class="course-area pt-140 pb-170">
+	<section id="courses" class="course-area pt-140 pb-60">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-6 col-lg-7 col-md-10 mx-auto">
 					<div class="section-title text-center mb-50">
 						<h2 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Popular Courses</h2>
-						<p class="wow fadeInUp" data-wow-delay=".4s">eStore UI Kit comes with all essential features, sections and elements you need
+						<p class="wow fadeInUp" data-wow-delay=".4s">eStore UI Kit comes with all essential features,
+							sections and elements you need
 							to design and develop web UI efficiently.</p>
 					</div>
 				</div>
@@ -192,34 +220,31 @@
 			<div class="row mb-30">
 				<div class="col-xl-4 col-lg-4 col-md-6">
 					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
-						<div class="course-img">
-							<a href="course-single.html">
-								<img src="../assets/images/course/full-stack.jpg" alt="">
+
+						<?php
+						// print_r($coursecatalog);
+						foreach ($coursecatalog as $course) {
+							echo "
+							<div class='course-img'>
+							<a href=''>
+								<img src='/website/assets/images/courseBanners/" . htmlspecialchars($course['course_img']) . "' alt='course_img'>
 							</a>
 						</div>
-						<div class="course-info">
-							<h4><a href="course-single.html">Full-stack Web Development</a></h4>
-							<div class="course-meta">
-								<div class="meta-item">
-									<i class="lni lni-user"></i>
-									<span>3.5k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-eye"></i>
-									<span>12k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-star"></i>
-									<span>5.0</span>
-								</div>
-								<div class="price">
-									<span>$99.00</span>
-								</div>
+						<div class='course-info'>
+							<h4><a href=''>$course[course_title]</a></h4>
+							
 							</div>
 						</div>
+						
+						
+						";
+						}
+
+						?>
+
 					</div>
 				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6">
+				<!-- <div class="col-xl-4 col-lg-4 col-md-6">
 					<div class="single-course wow fadeInUp" data-wow-delay=".4s">
 						<div class="course-img">
 							<a href="course-single.html">
@@ -276,9 +301,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
-			<div class="row mb-30">
+			<!-- <div class="row mb-30">
 				<div class="col-xl-4 col-lg-4 col-md-6">
 					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
 						<div class="course-img">
@@ -366,8 +391,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			
+			</div> -->
+
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="view-all-btn text-center">
@@ -413,7 +438,9 @@
 				<div class="col-xl-8 col-lg-10 mx-auto">
 					<div class="section-title text-center">
 						<h2 class="wow fadeInUp" data-wow-delay=".2s">Top Catagories</h2>
-						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos accusam.</p>
+						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing
+							elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+							diam voluptua. At vero eos accusam.</p>
 					</div>
 				</div>
 			</div>
@@ -510,17 +537,18 @@
 	<!--====== TEAM PART ENDS ======-->
 
 	<!--====== TESTIMONIAL PART START ======-->
-	
+
 	<!--====== TESTIMONIAL PART ENDS ======-->
 
 	<!--====== BLOG PART START ======-->
-	<section id="blog" class="blog-area pt-170 pb-140">
+	<section id="blog" class="blog-area pt-20 pb-20">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-6 col-lg-7">
 					<div class="section-title">
 						<h2 class="wow fadeInUp" data-wow-delay=".2s">From The Blog</h2>
-						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt utlabo</p>
+						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing
+							elitr, sed diam nonumy eirmod tempor invidunt utlabo</p>
 					</div>
 				</div>
 			</div>
@@ -534,7 +562,7 @@
 						</div>
 						<div class="blog-content">
 							<h4><a href="javascript:void(0)">Modern website design
-							tools</a></h4>
+									tools</a></h4>
 							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam.</p>
 						</div>
 					</div>
@@ -580,7 +608,8 @@
 				<div class="col-xl-5 col-lg-5">
 					<div class="section-title">
 						<h2 class="wow fadeInUp" data-wow-delay=".2s">Get In Touch</h2>
-						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing </br>elitr, sed diam nonumy eirmod tempor invidunt utlabo</p>
+						<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing
+							</br>elitr, sed diam nonumy eirmod tempor invidunt utlabo</p>
 					</div>
 					<div class="contact-content">
 						<h3>Hot Line Call Us 24/7</h3>
@@ -631,7 +660,8 @@
 						<a href="#" class="logo d-blok">
 							<img src="../assets/images/logo.svg" alt="">
 						</a>
-						<p>Lorem ipsum dolor sit amco nsetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna .</p>
+						<p>Lorem ipsum dolor sit amco nsetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+							ut labore et dolore magna .</p>
 					</div>
 				</div>
 				<div class="col-xl-2 col-lg-2 offset-xl-1 offset-lg-1 col-md-6">
@@ -660,23 +690,30 @@
 					<div class="footer-widget">
 						<h5>Contact Us</h5>
 						<ul>
-							<li><p>Phone: +884-9273-3867</p></li>
-							<li><p>Email: hello@gmail.com</p></li>
-							<li><p>Address: Random Road<br> USA</p></li>
+							<li>
+								<p>Phone: +884-9273-3867</p>
+							</li>
+							<li>
+								<p>Email: hello@gmail.com</p>
+							</li>
+							<li>
+								<p>Address: Random Road<br> USA</p>
+							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="footer-credit">
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <div class="copy-right text-center text-md-left">
-                            <p class="text-center">Designed and Developed by <a href="https://github.com/Maroualab/Youdemy">Maroua Labballi</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div class="row">
+					<div class="col-md-6 ">
+						<div class="copy-right text-center text-md-left">
+							<p class="text-center">Designed and Developed by <a
+									href="https://github.com/Maroualab/Youdemy">Maroua Labballi</a></p>
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>
 		</div>
 	</footer>
 	<!--====== FOOTER PART ENDS ======-->
@@ -698,56 +735,56 @@
 	<script>
 
 
-    // Get the navbar
+		// Get the navbar
 
-    // for menu scroll 
-    var pageLink = document.querySelectorAll('.page-scroll');
-    
-    pageLink.forEach(elem => {
-        elem.addEventListener('click', e => {
-            e.preventDefault();
-            document.querySelector(elem.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth',
-                offsetTop: 1 - 60,
-            });
-        });
-    });
+		// for menu scroll 
+		var pageLink = document.querySelectorAll('.page-scroll');
 
-    // section menu active
-    function onScroll(event) {
-        var sections = document.querySelectorAll('.page-scroll');
-        var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+		pageLink.forEach(elem => {
+			elem.addEventListener('click', e => {
+				e.preventDefault();
+				document.querySelector(elem.getAttribute('href')).scrollIntoView({
+					behavior: 'smooth',
+					offsetTop: 1 - 60,
+				});
+			});
+		});
 
-        for (var i = 0; i < sections.length; i++) {
-            var currLink = sections[i];
-            var val = currLink.getAttribute('href');
-            var refElement = document.querySelector(val);
-            var scrollTopMinus = scrollPos + 73;
-            if (refElement.offsetTop <= scrollTopMinus && (refElement.offsetTop + refElement.offsetHeight > scrollTopMinus)) {
-                document.querySelector('.page-scroll').classList.remove('active');
-                currLink.classList.add('active');
-            } else {
-                currLink.classList.remove('active');
-            }
-        }
-    };
+		// section menu active
+		function onScroll(event) {
+			var sections = document.querySelectorAll('.page-scroll');
+			var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 
-    window.document.addEventListener('scroll', onScroll);
+			for (var i = 0; i < sections.length; i++) {
+				var currLink = sections[i];
+				var val = currLink.getAttribute('href');
+				var refElement = document.querySelector(val);
+				var scrollTopMinus = scrollPos + 73;
+				if (refElement.offsetTop <= scrollTopMinus && (refElement.offsetTop + refElement.offsetHeight > scrollTopMinus)) {
+					document.querySelector('.page-scroll').classList.remove('active');
+					currLink.classList.add('active');
+				} else {
+					currLink.classList.remove('active');
+				}
+			}
+		};
+
+		window.document.addEventListener('scroll', onScroll);
 
 
-    //===== close navbar-collapse when a  clicked
-    let navbarToggler = document.querySelector(".navbar-toggler");    
-    var navbarCollapse = document.querySelector(".navbar-collapse");
+		//===== close navbar-collapse when a  clicked
+		let navbarToggler = document.querySelector(".navbar-toggler");
+		var navbarCollapse = document.querySelector(".navbar-collapse");
 
-    document.querySelectorAll(".page-scroll").forEach(e =>
-        e.addEventListener("click", () => {
-            navbarToggler.classList.remove("active");
-            navbarCollapse.classList.remove('show')
-        })
-    );
-    navbarToggler.addEventListener('click', function() {
-        navbarToggler.classList.toggle("active");
-    });
+		document.querySelectorAll(".page-scroll").forEach(e =>
+			e.addEventListener("click", () => {
+				navbarToggler.classList.remove("active");
+				navbarCollapse.classList.remove('show')
+			})
+		);
+		navbarToggler.addEventListener('click', function () {
+			navbarToggler.classList.toggle("active");
+		});
 
 	</script>
 

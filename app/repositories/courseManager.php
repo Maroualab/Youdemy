@@ -87,8 +87,6 @@ LEFT JOIN
     Tags t ON ct.tag_id = t.id
 WHERE 
     c.teacher_id = :teacher_id
-AND 
-c.status = 'approved'
 GROUP BY 
     c.id;
 ";
@@ -159,6 +157,8 @@ users u ON c.teacher_id=u.id
             Tags t ON ct.tag_id = t.id
         JOIN 
             Users u ON c.teacher_id = u.id
+        AND 
+c.status = 'approved'
         GROUP BY 
             c.id;
         ";
@@ -261,7 +261,7 @@ users u ON c.teacher_id=u.id
             $sql = "DELETE FROM coursetags WHERE course_id = :course_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['course_id' => $id]);
-            
+
             $sql = "DELETE FROM courses WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['id' => $id]);

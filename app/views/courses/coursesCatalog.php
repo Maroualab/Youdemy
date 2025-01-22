@@ -1,3 +1,9 @@
+<?php 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
+$coursecatalog = new CourseManager();
+$coursecatalog = $coursecatalog->fetchAllCourses();
+
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -94,62 +100,41 @@
             </div>
 
             <div id="course-list" class="row mb-30">
-                <!-- Existing Course -->
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="single-course wow fadeInUp" data-wow-delay=".2s">
-                        <div class="course-img">
-                            <a href="course-single.php">
-                                <img src="../../../assets/images/course/full-stack.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="course-info">
-                            <h4><a href="course-single.php">Full-stack Web Development</a></h4>
-                           
-                        </div>
-                    </div>
-                </div>
+				<div class="col-xl-4 col-lg-4 col-md-6">
+					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
+						
+					<?php 
+					// print_r($coursecatalog);
+					foreach ($coursecatalog as $course) {
+						echo "
+							<div class='course-img'>
+							<a href=''>
+								<img src='/website/assets/images/courseBanners/". htmlspecialchars($course['course_img']) . "' alt='course_img'>
+							</a>
+						</div>
+						<div class='course-info'>
+							<h4><a href=''>$course[course_title]</a></h4>
+							
+							</div>
+						</div>
+						
+						
+						";
+					}
+					
+					?>
+				
+					</div>
+				</div>
 
-                <!-- New Random Course -->
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="single-course wow fadeInUp" data-wow-delay=".4s">
-                        <div class="course-img">
-                            <a href="course-single.php">
-                                <img src="../../../assets/images/course/python.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="course-info">
-                            <h4><a href="course-single.php">Getting Started with Python</a></h4>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="single-course wow fadeInUp" data-wow-delay=".4s">
-                        <div class="course-img">
-                            <a href="course-single.php">
-                                <img src="../../../assets/images/course/python.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="course-info">
-                            <h4><a href="course-single.php">Getting Started with Python</a></h4>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="single-course wow fadeInUp" data-wow-delay=".4s">
-                        <div class="course-img">
-                            <a href="course-single.php">
-                                <img src="../../../assets/images/course/python.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="course-info">
-                            <h4><a href="course-single.php">Getting Started with Python</a></h4>
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+
+
+
+
+
+
 
             <!-- Pagination -->
             <div class="row">
