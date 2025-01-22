@@ -145,7 +145,35 @@ $coursecatalog = $coursecatalog->getAllCourses();
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        // print_r($coursecatalog);
+                        foreach ($coursecatalog as $course) {
+                            echo "
+                         <tr class='hover:bg-gray-100 transition'>
+                            <td class='border border-gray-300 px-4 py-2'>
+                             <a href='./courseDetails.php?course_id=$course[id]'>
+                                    <img width=100 src='/website/assets/images/courseBanners/" . htmlspecialchars($course['img']) . "' alt='course_picture'>
+                                </a>
+                            </td>
+                             <td class='border border-gray-300 px-4 py-2'> <a href='./courseDetails.php?course_id=$course[id]'>
+                           <span>$course[title]</span> </a></td>
+                             <td class='border border-gray-300 px-4 py-2'> 
+                           $course[status]</td>
+                             <td class='border border-gray-300 px-4 py-2'>
+        
+        <!-- Reject Button -->
+        <a href='/website/app/controllers/approveCourses.php?id=$course[id]&status=$course[status]&reject'>
+            <button name='reject' value='reject' class='ml-2 bg-red-600 text-white py-1 px-2 rounded-md hover:bg-red-700 transition'>
+                Reject
+            </button>
+        </a>
+    </td>
+                        </tr>
                         
+                        
+                        ";
+                        }
+                        ?>
 
                     </tbody>
                 </table>
