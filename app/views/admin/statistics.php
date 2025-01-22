@@ -108,7 +108,7 @@ global $TopTeachers;
                         include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
                         $MostEnrolledCourseStats = new AdminStats;
                         $MostEnrolledCourseStats= $MostEnrolledCourseStats->calculateBestCourse();
-                        echo $MostEnrolledCourseStats['title'] ;
+                        echo isset($MostEnrolledCourseStats['title'])?$MostEnrolledCourseStats['title']:"no course is enrolled" ;
                          ?>
                     </strong></p>
                 <h3>Top 3 Instructors:</h3>
