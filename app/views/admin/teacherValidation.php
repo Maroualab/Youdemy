@@ -50,16 +50,16 @@ global $pendingCourses;
                     <div class="flex space-x-4">
                         <!-- Navigation links -->
                         <a href="./adminDashboard.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
                         <a href="#teacher-management"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
                         <a href="./TagCategory.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category
                             Management</a>
                         <a href="./statistics.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
                         <a href="../../controllers/logout.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
                     </div>
                 </div>
             </div>
@@ -180,12 +180,6 @@ global $pendingCourses;
             </button>
         </a>
         
-        <!-- Reject Button -->
-        <a href='/website/app/controllers/approveCourses.php?id=$pendingCourse[id]&status=$pendingCourse[status]&reject'>
-            <button name='reject' value='reject' class='ml-2 bg-red-600 text-white py-1 px-2 rounded-md hover:bg-red-700 transition'>
-                Reject
-            </button>
-        </a>
     </td>
                         </tr>
                         
@@ -200,7 +194,6 @@ global $pendingCourses;
             </div>
         </section>
     </main>
-
 
     <script>
         // Toggle the mobile menu

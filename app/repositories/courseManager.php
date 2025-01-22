@@ -15,18 +15,13 @@ class CourseManager
 
     public function getAllCourses()
     {
-        $sql = "SELECT * FROM courses";
+        $sql = "SELECT * FROM courses WHERE status = 'approved'";
         $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($stmt->rowCount() > 0) {
-            $courses = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $courses[] = $row;
-            }
-            return $courses;
-        } else {
-            return [];
-        }
+        return $result;
+      
     }
 
     public function getCourseById($id)

@@ -33,41 +33,36 @@ if (isset($_GET['course_id'])) {
 
     <!-- Navbar -->
     <nav class="bg-yellow-500 text-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-16">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button -->
-                    <button id="mobile-menu-button"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-500 focus:ring-white">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex items-center justify-center sm:justify-start">
-                    <a href="#" class="text-3xl font-semibold">Admin</a>
-                </div>
-                <div class="hidden sm:block sm:ml-6">
-                    <div class="flex space-x-4">
-                        <!-- Navigation links -->
-                        <a href="./adminDashboard.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
-                        <a href="#teacher-management"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
-                        <a href="./TagCategory.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category
-                            Management</a>
-                        <a href="./statistics.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
-                        <a href="../../controllers/logout.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
-                    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-16">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-500 focus:ring-white">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="block w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex items-center justify-center sm:justify-start">
+                <a href="#" class="text-3xl font-semibold no-underline">Admin</a>
+            </div>
+            <div class="hidden sm:block sm:ml-6">
+                <div class="flex space-x-4">
+                    <!-- Navigation links -->
+                    <a href="./adminDashboard.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
+                    <a href="#teacher-management" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
+                    <a href="./TagCategory.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
+                    <a href="./statistics.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
+                    <a href="../../controllers/logout.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
+
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="sm:hidden">

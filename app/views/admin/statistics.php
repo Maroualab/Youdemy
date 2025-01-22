@@ -52,15 +52,18 @@ global $categories;
                     <div class="flex space-x-4">
                         <!-- Navigation links -->
                         <a href="./adminDashboard.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User
+                            Management</a>
                         <a href="./TeacherValidation.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher
+                            Management</a>
                         <a href="./TagCategory.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag &
+                            Category Management</a>
                         <a href="#statistics"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
                         <a href="../../controllers/logout.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
                     </div>
                 </div>
             </div>
@@ -69,9 +72,12 @@ global $categories;
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="sm:hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="./adminDashboard.php" class="text-white block px-3 py-2 rounded-md text-base">User Management</a>
-                <a href="./TeacherValidation.php" class="text-white block px-3 py-2 rounded-md text-base">Teacher Management</a>
-                <a href="./TagCategory.php" class="text-white block px-3 py-2 rounded-md text-base">Tag & Category Management</a>
+                <a href="./adminDashboard.php" class="text-white block px-3 py-2 rounded-md text-base">User
+                    Management</a>
+                <a href="./TeacherValidation.php" class="text-white block px-3 py-2 rounded-md text-base">Teacher
+                    Management</a>
+                <a href="./TagCategory.php" class="text-white block px-3 py-2 rounded-md text-base">Tag & Category
+                    Management</a>
                 <a href="#statistics" class="text-white block px-3 py-2 rounded-md text-base">Statistics</a>
                 <a href="../../controllers/logout.php"
                     class="text-white block px-3 py-2 rounded-md text-base">Logout</a>
@@ -82,13 +88,13 @@ global $categories;
     <!-- Main Content -->
     <main class="container mx-auto my-6 p-6 bg-white rounded-lg shadow-md">
 
-         <!-- Statistics Section -->
- <section id="statistics" class="mb-8">
+        <!-- Statistics Section -->
+        <section id="statistics" class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Global Statistics</h2>
             <div class="space-y-4">
-                <p>Total Courses: <strong> <?php echo count($coursecatalog);?>
-                </strong></p>
-                <p>Categories: <strong><?php echo count($categories);?></strong></p>
+                <p>Total Courses: <strong> <?php echo count($coursecatalog); ?>
+                    </strong></p>
+                <p>Categories: <strong><?php echo count($categories); ?></strong></p>
                 <h3 class="mt-4">Most Enrolled Course:</h3>
                 <p><strong>Understanding JavaScript</strong></p>
                 <h3>Top 3 Instructors:</h3>
@@ -98,7 +104,8 @@ global $categories;
                     <li>Charlie Brown</li>
                 </ul>
             </div>
-        </section>    </main>
+        </section>
+    </main>
 
     <script>
         // Toggle the mobile menu

@@ -48,15 +48,15 @@ global $categories;
                     <div class="flex space-x-4">
                         <!-- Navigation links -->
                         <a href="./adminDashboard.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
                         <a href="./TeacherValidation.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
                         <a href="./TagCategory.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
                         <a href="./statistics.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
                         <a href="../../controllers/logout.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
                     </div>
                 </div>
             </div>

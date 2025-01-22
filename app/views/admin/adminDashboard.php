@@ -2,6 +2,12 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/UsersControllers.php';
 global $users;
 
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
+$coursecatalog = new CourseManager();
+$coursecatalog = $coursecatalog->getAllCourses();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,15 +51,15 @@ global $users;
                     <div class="flex space-x-4">
                         <!-- Navigation links -->
                         <a href="#user-management"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
                         <a href="./TeacherValidation.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
                         <a href="./TagCategory.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
                         <a href="./statistics.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
                         <a href="../../controllers/logout.php"
-                            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>
                     </div>
                 </div>
             </div>
@@ -118,6 +124,37 @@ global $users;
 
        
     </main>
+    
+    <main class="container mx-auto my-6 p-6 bg-white rounded-lg shadow-md">
+
+        <!-- Content Management Section -->
+        <section id="teacher-management" class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Course Management</h2>
+
+
+            <!-- Manage Courses -->
+            <div>
+                <h3 class="text-xl mb-2">All Courses</h3>
+                <table class="min-w-full border-collapse shadow-lg">
+                    <thead>
+                        <tr class="bg-yellow-500 text-white">
+                            <th class="py-3 px-4 border border-gray-300">Img</th>
+                            <th class="py-3 px-4 border border-gray-300">Title</th>
+                            <th class="py-3 px-4 border border-gray-300">Status</th>
+                            <th class="py-3 px-4 border border-gray-300">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </section>
+    </main>
+
+
 
     <script>
         // Toggle the mobile menu
