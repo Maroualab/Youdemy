@@ -19,4 +19,7 @@ class Category{
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['name'=>$this->category]);
     }
+
+    public function deleteCategory(){}
+    public function displayAllCategories(){}
 }

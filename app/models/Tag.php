@@ -20,6 +20,9 @@ class Tag{
         $stmt->execute(['name'=>$this->tag]);
     }
 
+    public function deleteTag(){}
     
-
+    public function displayTags(){}
+    
+ 
 }

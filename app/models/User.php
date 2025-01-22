@@ -74,6 +74,12 @@ class User
 
 class Teacher extends User
 {
+
+    public function createCourse(){}
+
+    public function updateCourse(){}
+
+    public function deleteCourse(){}
     public static function getPendingTeachers()
     {
         $sql = "SELECT * FROM users WHERE role = 'teacher' AND status != 'active' ";
@@ -81,6 +87,8 @@ class Teacher extends User
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    
 }
 
 
