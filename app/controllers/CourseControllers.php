@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/website/app/repositories/courseManager.
 
 session_start();
 
-if( isset($_POST['submit'])){
+if(isset($_POST['submit'])){
 
     if (!isset($_SESSION['teacher_id'])) {
         header('Location: ../auth/login.php');
@@ -32,13 +32,22 @@ if( isset($_POST['submit'])){
     move_uploaded_file($image['tmp_name'],$target);
 
 
-
+    if(isset($_POST['course_id'])&&!empty($_POST['course_id'])){
+        $id=$_POST['course_id'];
+    $courseUpdate=new CourseManager();
+    $courseUpdate->updateCourse($id, $title, $description, $content, $teacher_id, $category_id, $tags, $image['name']);
+    header("Location: ../views/teacher/teacherDashboard.php");
+    
+    }else{
     $courseInsert=new CourseManager();
     $courseInsert->insertCourse($title, $description, $content, $teacher_id, $category_id, $tags,$image['name']);
 
     header("Location: ../views/teacher/teacherDashboard.php");
     
 }
+}
+
+
 
 
 $pendingCourses=new CourseManager();

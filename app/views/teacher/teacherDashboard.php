@@ -9,7 +9,6 @@ if (!isset($_SESSION['teacher_id'])) {
 
 $teacher_id = $_SESSION['teacher_id'];
 
-
 include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/controllers/CategoryControllers.php';
 $categories = CategoryManager::fetchAllCategories();
 global $categories;
@@ -26,6 +25,14 @@ $coursecatalog = $coursecatalog->fetchCourseCatalog($teacher_id);
 if (isset($_SESSION['error'])) {
     echo "<script>alert('" . $_SESSION['error'] . "');</script>";
     unset($_SESSION['error']);
+}
+
+if (isset($_GET['course_id'])) {
+
+    $course_id = $_GET['course_id'];
+    $singleCourse = new CourseManager();
+    $singleCourse = $singleCourse->fetchSingleCourse($course_id, $teacher_id);
+    $singleCourse = isset($singleCourse)?$singleCourse:[];
 }
 
 ?>
@@ -413,40 +420,42 @@ if (isset($_SESSION['error'])) {
 </head>
 
 <body>
- <!--====== HEADER PART START ======-->
- <header class="bg-white shadow">
-    <div class="container mx-auto px-4">
-        <nav class="flex items-center justify-between py-4">
-            <a class="navbar-brand" href="../../../public/index.php" aria-label="Homepage">
-                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo" class="h-10"> <!-- Add class to control logo size -->
-            </a>
-            <ul class="flex space-x-6">
-                <li>
-                    <a href="#add-course" id="addSection" class="flex items-center active">
-                        <i class="fas fa-plus-circle"></i> Add Course
-                    </a>
-                </li>
-                <li>
-                    <a href="#manage-courses" id="manageSection" class="flex items-center">
-                        <i class="fas fa-tasks"></i> Manage Courses
-                    </a>
-                </li>
-                <li>
-                    <a href="#statistics" id="statisticsSection" class="flex items-center">
-                        <i class="fas fa-chart-bar"></i> Statistics
-                    </a>
-                </li>
-                <li>
-                    <a href="../../controllers/logout.php" aria-label="Logout">
-                        <button class="font-semibold text-red-600 bg-white  hover:bg-red-50 hover:text-red-700 transition duration-300 ease-in-out">
-                            Logout
-                        </button>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    <!--====== HEADER PART START ======-->
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between py-4">
+                <a class="navbar-brand" href="../../../public/index.php" aria-label="Homepage">
+                    <img id="logo" src="../../../assets/images/logo.svg" alt="Logo" class="h-10">
+                    <!-- Add class to control logo size -->
+                </a>
+                <ul class="flex space-x-6">
+                    <li>
+                        <a href="#add-course" id="addSection" class="flex items-center active">
+                            <i class="fas fa-plus-circle"></i> Add Course
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#manage-courses" id="manageSection" class="flex items-center">
+                            <i class="fas fa-tasks"></i> Manage Courses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#statistics" id="statisticsSection" class="flex items-center">
+                            <i class="fas fa-chart-bar"></i> Statistics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../controllers/logout.php" aria-label="Logout">
+                            <button
+                                class="font-semibold text-red-600 bg-white  hover:bg-red-50 hover:text-red-700 transition duration-300 ease-in-out">
+                                Logout
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
 
     <!--====== HEADER PART ENDS ======-->
@@ -457,10 +466,12 @@ if (isset($_SESSION['error'])) {
             <!-- <h2><i class="fas fa-plus-circle"></i> Add New Course</h2> -->
 
 
-            <form id="newCourseForm" class="course-form" action="../../controllers/CourseControllers.php" method="POST" enctype="multipart/form-data">
+            <form id="newCourseForm" class="course-form" action="../../controllers/CourseControllers.php" method="POST"
+                enctype="multipart/form-data">
 
                 <div class="form-group content-upload-section">
                     <label>Course Content</label>
+                    <!-- <?php print_r($singleCourse) ;?> -->
                     <div class="content-upload">
                         <div class="upload-box">
                             <!-- <i class="fas fa-file-pdf"></i> -->
@@ -476,15 +487,15 @@ if (isset($_SESSION['error'])) {
 
                 <div class="form-group">
                     <label for="courseTitle">Course Title</label>
-                    <input type="text" id="courseTitle" name="title" required>
+                    <input type="text" id="courseTitle" name="title" value="<?=isset($singleCourse['course_title'])?$singleCourse['course_title']:'' ?>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="courseDescription">Course Description</label>
-                    <textarea id="courseDescription" name="description" rows="4" required></textarea>
+                    <textarea id="courseDescription" name="description" rows="4" required><?=isset($singleCourse['course_description'])?$singleCourse['course_description']:'' ?></textarea>
 
                     <label for="courseContent">Course Content</label>
-                    <textarea name="content" id="editor"></textarea>
+                    <textarea name="content" id="editor"><?=isset($singleCourse['course_content'])?$singleCourse['course_content']:'' ?></textarea>
 
                 </div>
 
@@ -493,29 +504,24 @@ if (isset($_SESSION['error'])) {
                     <div class="form-group">
                         <label for="courseCategory">Category</label>
                         <select id="courseCategory" name="category" required>
-                            <option value="">Select Category</option>
-                            <?php foreach ($categories as $category) {
+                            <option value="" >Select Category</option>
+
+                            <?php   
+                            foreach ($categories as $category) {
+                                $selected='';
+                                if($singleCourse['course_category']===$category['name']){
+                                    $selected='selected';
+                                }
                                 echo "
-                                <option value='$category[id]'>
+                                <option value='$category[id]' $selected>
                                     $category[name]</option>
                                 ";
                             } ?>
                         </select>
                     </div>
-
-
-                    <!-- <div class="form-group">
-                        <label for="courseType">Course Type</label>
-                        <select id="courseType"  >
-                            <option value="">Select Type</option>
-                            <option value="video">Video Course</option>
-                            <option value="document">Document Based</option>
-                            <option value="mixed">Mixed Content</option>
-                        </select>
-                    </div> -->
-
-
                 </div>
+
+
                 <div class="form-group">
                     <label>Course Tags</label>
                     <div class="tags-wrapper">
@@ -527,13 +533,22 @@ if (isset($_SESSION['error'])) {
                             <div class="tags-group">
                                 <h4>Tags</h4>
                                 <div class="tags-list">
-                                    <?php foreach ($tags as $tag) {
-                                        echo "
+                                    <?php 
+                                    if(isset($singleCourse)){
+                                    $editTags=explode(',',$singleCourse['course_tags']);
+                                }
+                                    // print_r($editTags);
+                                    foreach ($tags as $tag) {
+                                        if(isset($editTags)){
+                                        $checked = in_array($tag['name'], $editTags) ? 'checked' : '';  
+                                    }   
+                                    global $checked;                               
+                                       echo "
                         <label class='tag'>
-                            <input type='checkbox' name='tags[]' value='$tag[id]'>
+                            <input type='checkbox' name='tags[]' value='$tag[id]' $checked>
                             <span>$tag[name]</span>
                         </label>
-                        ";
+                                        ";
                                     } ?>
                                 </div>
                             </div>
@@ -542,7 +557,7 @@ if (isset($_SESSION['error'])) {
                 </div>
 
                 </div>
-
+                 <input name="course_id" type="hidden" value="<?=isset($singleCourse['course_id'])?$singleCourse['course_id']:'' ?>">                   
                 <button type="submit" name="submit" class="submit-btn">Create Course</button>
             </form>
         </section>
@@ -584,17 +599,31 @@ if (isset($_SESSION['error'])) {
                     <div class='col-xl-4 col-lg-4 col-md-6'>
                         <div class='single-course wow fadeInUp' data-wow-delay='.2s'>
                             <div class='course-img'>
-                                <a href='./courseDetails.php'>
-                                    <img src='/website/assets/images/courseBanners/". htmlspecialchars($displaycourse['course_img']) . "' alt='course_picture'>
+                                <a href='./courseDetails.php?course_id=$displaycourse[course_id]'>
+                                    <img src='/website/assets/images/courseBanners/" . htmlspecialchars($displaycourse['course_img']) . "' alt='course_picture'>
                                 </a>
                             </div>
                             <div class='course-info'>
                                 <h4><a href='./courseDetails.php?course_id=$displaycourse[course_id]'>$displaycourse[course_title]</a></h4>
                             </div>
-                        </div>
+                        
+                       
+                            <a href='/website/app/views/teacher/teacherDashboard.php?course_id=$displaycourse[course_id]'> 
+      <button class='flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white'>
+       <i class='fa-regular fa-pen-to-square'></i>
+        </button></a>
+        
+        <a href='/website/app/controllers/deleteCourse.php?DeleteId=$displaycourse[course_id]'> 
+      <button class='flex p-2.5 bg-red-500 rounded-xl hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white'>
+       <i class='fas fa-trash-alt'></i>
+        </button></a>
+
+
+        </div>
                     </div>
+                
                ";
-                    } 
+                    }
                     ?>
 
 
@@ -629,40 +658,41 @@ if (isset($_SESSION['error'])) {
         <section id="statistics" class="dashboard-section" style="display: none;">
             <h2><i class="fas fa-chart-bar"></i> Course Statistics</h2>
             <div class="stats-grid">
-            <div class="stat-card">
-                <i class="fas fa-book-open"></i>
-                <div class="stat-info">
-                <h3>Total Courses</h3>
-                <p id="totalCourses">
-                    
-                    
-                    <?php 
-                // echo count($coursecatalog);
-                include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
-                $totalCourses = new CourseStats();
-                 print_r ($totalCourses ->calculate($teacher_id));
-                 ?></p>
+                <div class="stat-card">
+                    <i class="fas fa-book-open"></i>
+                    <div class="stat-info">
+                        <h3>Total Courses</h3>
+                        <p id="totalCourses">
 
 
+                            <?php
+                            // echo count($coursecatalog);
+                            include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
+                            $totalCourses = new CourseStats();
+                            print_r($totalCourses->calculate($teacher_id));
+                            ?>
+                        </p>
+
+
+                    </div>
                 </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-users"></i>
-                <div class="stat-info">
-                <h3>Total Students</h3>
-                <p id="totalStudents">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <h3>Total Students</h3>
+                        <p id="totalStudents">
 
-                    <?php
-                    include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
-                    $totalStudents = new StudentStats();
-                    echo ($totalStudents->calculate($teacher_id));
-                    ?>
-
+                            <?php
+                            include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/models/Stats.php';
+                            $totalStudents = new StudentStats();
+                            echo ($totalStudents->calculate($teacher_id));
+                            ?>
 
 
-                </p>
+
+                        </p>
+                    </div>
                 </div>
-            </div>
             </div>
         </section>
 

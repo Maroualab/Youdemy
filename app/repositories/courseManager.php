@@ -87,6 +87,8 @@ LEFT JOIN
     Tags t ON ct.tag_id = t.id
 WHERE 
     c.teacher_id = :teacher_id
+AND 
+c.status = 'approved'
 GROUP BY 
     c.id;
 ";
@@ -220,6 +222,56 @@ users u ON c.teacher_id=u.id
         ]);
     }
 
+    public function updateCourse($id, $title, $description, $content, $teacher_id, $category_id, $tags, $image)
+    {
+        try {
+            $sql = "UPDATE courses SET title = :title, description = :description, content = :content, teacher_id = :teacher_id, category_id = :category_id, img = :img WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                'title' => $title,
+                'description' => $description,
+                'content' => $content,
+                'teacher_id' => $teacher_id,
+                'category_id' => $category_id,
+                'img' => $image,
+                'id' => $id
+            ]);
+
+            $stmt = $this->conn->prepare("DELETE FROM coursetags WHERE course_id = :course_id");
+            $stmt->execute(['course_id' => $id]);
+
+            if (!empty($tags)) {
+                foreach ($tags as $tag_id) {
+                    $stmt = $this->conn->prepare("INSERT INTO coursetags (course_id, tag_id) VALUES (:course_id, :tag_id)");
+                    $stmt->execute([
+                        'course_id' => $id,
+                        'tag_id' => $tag_id
+                    ]);
+                }
+            }
+
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function deleteCourse($id)
+    {
+        try {
+            $sql = "DELETE FROM coursetags WHERE course_id = :course_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['course_id' => $id]);
+            
+            $sql = "DELETE FROM courses WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+           
+
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 
 }
 
