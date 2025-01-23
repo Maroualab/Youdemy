@@ -183,20 +183,7 @@ $courses = $enroll->fetchEnrolledCourses($student_id);
     <script src="../../../assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
     <script src="../../../assets/js/main.js"></script>
 
-    <script>
-        function filterCourses() {
-            const input = document.getElementById('search').value.toLowerCase();
-            const courses = document.querySelectorAll('.single-course');
-            courses.forEach(course => {
-                const title = course.querySelector('h4 a').textContent.toLowerCase();
-                if (title.includes(input)) {
-                    course.style.display = '';
-                } else {
-                    course.style.display = 'none';
-                }
-            });
-        }
-    </script>
+
 </body>
 
 </html>

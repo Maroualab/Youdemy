@@ -5,6 +5,8 @@ $student_id = $_SESSION['student_id'];
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/website/app/repositories/courseManager.php';
 $coursecatalog = new CourseManager();
+
+$offset = isset($_GET['page']) && is_numeric($_GET['page'])? ((int)$_GET['page'] * 6) : 0;
 $coursecatalog = $coursecatalog->fetchAllCourses();
 
 ?>
@@ -112,16 +114,18 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
                
 
             <!-- Pagination -->
+            <!-- Pagination -->
             <div class="row">
                 <div class="col-xl-12">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
+                            <?php $pages= isset($coursecatalog[0]['total_courses'])? ceil($coursecatalog[0]['total_courses']/6):0;
+                            for($i=0;$i<$pages;$i++){
+                               echo "<li class='page-item'><a class='page-link' href='/website/app/views/courses/coursesCatalog.php?page=".($i)."'>".($i+1)."</a></li>";
+                            }
+                            ?>
+                            
+                       </ul>
                     </nav>
                 </div>
             </div>
@@ -180,20 +184,7 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
     <script src="../../../assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
     <script src="../../../assets/js/main.js"></script>
 
-    <script>
-        function filterCourses() {
-            const input = document.getElementById('search').value.toLowerCase();
-            const courses = document.querySelectorAll('.single-course');
-            courses.forEach(course => {
-                const title = course.querySelector('h4 a').textContent.toLowerCase();
-                if (title.includes(input)) {
-                    course.style.display = '';
-                } else {
-                    course.style.display = 'none';
-                }
-            });
-        }
-    </script>
+
 </body>
 
 </html>

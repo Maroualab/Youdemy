@@ -749,18 +749,7 @@ if (isset($_GET['course_id'])) {
             statisticsbutton.classList.add("active");
         })
 
-        function filterCourses() {
-            const input = document.getElementById('search').value.toLowerCase();
-            const courses = document.querySelectorAll('.single-course');
-            courses.forEach(course => {
-                const title = course.querySelector('h4 a').textContent.toLowerCase();
-                if (title.includes(input)) {
-                    course.style.display = '';
-                } else {
-                    course.style.display = 'none';
-                }
-            });
-        }
+   
 
 
     </script>

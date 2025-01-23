@@ -137,31 +137,36 @@ users u ON c.teacher_id=u.id
         return $result;
     }
 
-    public function fetchAllCourses(){
+    public function fetchAllCourses($offset=null){
         $sql = "SELECT 
-            c.id AS course_id,
-            c.title AS course_title,
-            c.img AS course_img,
-            c.content AS course_content,
-            c.description AS course_description,
-            GROUP_CONCAT(t.name) AS course_tags,
-            cat.name AS course_category,
-            u.username AS teacher
-        FROM 
-            Courses c
-        JOIN 
-            Categories cat ON c.category_id = cat.id
-        LEFT JOIN 
-            CourseTags ct ON c.id = ct.course_id
-        LEFT JOIN 
-            Tags t ON ct.tag_id = t.id
-        LEFT JOIN 
-            Users u ON c.teacher_id = u.id
-        WHERE
-        c.status = 'approved'
-        GROUP BY 
-            c.id;
-        ";
+    (SELECT COUNT(*) FROM Courses WHERE status = 'approved') AS total_courses,
+    c.id AS course_id,
+    c.title AS course_title,
+    c.img AS course_img,
+    c.content AS course_content,
+    c.description AS course_description,
+    GROUP_CONCAT(t.name) AS course_tags,
+    cat.name AS course_category,
+    u.username AS teacher
+FROM 
+    Courses c
+JOIN 
+    Categories cat ON c.category_id = cat.id
+LEFT JOIN 
+    CourseTags ct ON c.id = ct.course_id
+LEFT JOIN 
+    Tags t ON ct.tag_id = t.id
+LEFT JOIN 
+    Users u ON c.teacher_id = u.id
+WHERE
+    c.status = 'approved'
+GROUP BY 
+    c.id
+LIMIT 
+6";
+        if($offset){
+            $sql.=" OFFSET $offset";
+            }
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
