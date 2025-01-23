@@ -53,8 +53,8 @@ if (isset($_GET['course_id'])) {
             <div class="hidden sm:block sm:ml-6">
                 <div class="flex space-x-4">
                     <!-- Navigation links -->
-                    <a href="./adminDashboard.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User Management</a>
-                    <a href="#teacher-management" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher Management</a>
+                    <a href="./adminDashboard.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User And Course Management</a>
+                    <a href="#teacher-management" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher And Course Validation</a>
                     <a href="./TagCategory.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag & Category Management</a>
                     <a href="./statistics.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Statistics</a>
                     <a href="../../controllers/logout.php" class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Logout</a>

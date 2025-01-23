@@ -59,11 +59,9 @@ global $TopTeachers;
                     <div class="flex space-x-4">
                         <!-- Navigation links -->
                         <a href="./adminDashboard.php"
-                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User
-                            Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">User And Course Management</a>
                         <a href="./TeacherValidation.php"
-                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher
-                            Management</a>
+                            class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Teacher And Course Validation</a>
                         <a href="./TagCategory.php"
                             class="no-underline text-white hover:text-yellow-300 px-3 py-2 rounded-md text-lg">Tag &
                             Category Management</a>

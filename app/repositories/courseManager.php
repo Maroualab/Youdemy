@@ -155,10 +155,10 @@ users u ON c.teacher_id=u.id
             CourseTags ct ON c.id = ct.course_id
         LEFT JOIN 
             Tags t ON ct.tag_id = t.id
-        JOIN 
+        LEFT JOIN 
             Users u ON c.teacher_id = u.id
-        AND 
-c.status = 'approved'
+        WHERE
+        c.status = 'approved'
         GROUP BY 
             c.id;
         ";

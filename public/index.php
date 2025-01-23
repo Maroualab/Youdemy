@@ -99,13 +99,11 @@ session_start();
 
 									<ul class="navbar-nav ml-auto">
 										<?php if (isset($_SESSION['student_id'])): ?>
-											<!-- Display Log Out button if session student_id exists and matches user id -->
 											<li class="nav-item">
 												<a class="header-btn btn-hover"
 													href="/website/app/controllers/logout.php">Log Out</a>
 											</li>
 										<?php else: ?>
-											<!-- Display Sign Up and Log In buttons if session student_id does not exist or doesn't match user id -->
 											<li class="nav-item" style="display:flex;gap:10px;">
 												<a class="header-btn btn-hover"
 													href="/website/app/Views/auth/sign-up.php">Sign Up</a>
@@ -218,181 +216,26 @@ session_start();
 				</div>
 			</div>
 			<div class="row mb-30">
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
-
-						<?php
-						// print_r($coursecatalog);
-						foreach ($coursecatalog as $course) {
-							echo "
-							<div class='course-img'>
-							<a href=''>
-								<img src='/website/assets/images/courseBanners/" . htmlspecialchars($course['course_img']) . "' alt='course_img'>
-							</a>
-						</div>
-						<div class='course-info'>
-							<h4><a href=''>$course[course_title]</a></h4>
-							
-							</div>
-						</div>
-						
-						
-						";
-						}
-
-						?>
-
-					</div>
-				</div>
-				<!-- <div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-course wow fadeInUp" data-wow-delay=".4s">
-						<div class="course-img">
-							<a href="course-single.html">
-								<img src="../assets/images/course/design.jpg" alt="">
-							</a>
-						</div>
-						<div class="course-info">
-							<h4><a href="course-single.html">UX/UI Design</a></h4>
-							<div class="course-meta">
-								<div class="meta-item">
-									<i class="lni lni-user"></i>
-									<span>3k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-eye"></i>
-									<span>11k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-star"></i>
-									<span>5.0</span>
-								</div>
-								<div class="price">
-									<span>$39.00</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-course wow fadeInUp" data-wow-delay=".6s">
-						<div class="course-img">
-							<a href="course-single.html">
-								<img src="../assets/images/course/js.jpg" alt="">
-							</a>
-						</div>
-						<div class="course-info">
-							<h4><a href="course-single.html">Modern JavaScript</a></h4>
-							<div class="course-meta">
-								<div class="meta-item">
-									<i class="lni lni-user"></i>
-									<span>2.5k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-eye"></i>
-									<span>18k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-star"></i>
-									<span>4.0</span>
-								</div>
-								<div class="price">
-									<span>$19.00</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
-			</div>
-			<!-- <div class="row mb-30">
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
-						<div class="course-img">
-							<a href="course-single.html">
-								<img src="../assets/images/course/business.jpg" alt="">
-							</a>
-						</div>
-						<div class="course-info">
-							<h4><a href="course-single.html">Business Development</a></h4>
-							<div class="course-meta">
-								<div class="meta-item">
-									<i class="lni lni-user"></i>
-									<span>1.5k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-eye"></i>
-									<span>15k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-star"></i>
-									<span>4.5</span>
-								</div>
-								<div class="price">
-									<span>$19.00</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-course wow fadeInUp" data-wow-delay=".4s">
-						<div class="course-img">
-							<a href="course-single.html">
-								<img src="../assets/images/course/marketing.jpg" alt="">
-							</a>
-						</div>
-						<div class="course-info">
-							<h4><a href="course-single.html">Email Marketing 101</a></h4>
-							<div class="course-meta">
-								<div class="meta-item">
-									<i class="lni lni-user"></i>
-									<span>1.9k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-eye"></i>
-									<span>5k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-star"></i>
-									<span>5.0</span>
-								</div>
-								<div class="price">
-									<span>$69.00</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-course wow fadeInUp" data-wow-delay=".6s">
-						<div class="course-img">
-							<a href="course-single.html">
-								<img src="../assets/images/course/python.jpg" alt="">
-							</a>
-						</div>
-						<div class="course-info">
-							<h4><a href="course-single.html">Getting Started with Python</a></h4>
-							<div class="course-meta">
-								<div class="meta-item">
-									<i class="lni lni-user"></i>
-									<span>1.2k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-eye"></i>
-									<span>13k</span>
-								</div>
-								<div class="meta-item">
-									<i class="lni lni-star"></i>
-									<span>3.5</span>
-								</div>
-								<div class="price">
-									<span>$9.00</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-
+			<?php
+                    // print_r($coursecatalog);
+                    foreach ($coursecatalog as $displaycourse) {
+                        echo "
+                    <div class='col-xl-4 col-lg-4 col-md-6'>
+                        <div class='single-course wow fadeInUp' data-wow-delay='.2s'>
+                            <div class='course-img'>
+                                <a href=''>
+                                    <img src='/website/assets/images/courseBanners/". htmlspecialchars($displaycourse['course_img']) . "' alt='course_picture'>
+                                </a>
+                            </div>
+                            <div class='course-info'>
+                                <h4><a href=''>$displaycourse[course_title]</a></h4>
+                            </div>
+                        </div>
+                    </div>
+               ";
+                    } 
+                    ?>
+				
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="view-all-btn text-center">

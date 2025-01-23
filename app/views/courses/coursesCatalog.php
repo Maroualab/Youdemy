@@ -34,48 +34,64 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
 </head>
 
 <body>
-    <!--====== HEADER PART START ======-->
-    <header class="header_area">
-        <div id="header_navbar" class="header_navbar">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-12">
-                        <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="../../../public/index.php">
-                                <img id="logo" src="../../../assets/images/logo.svg" alt="Logo">
-                            </a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                                <ul id="nav" class="navbar-nav ml-auto">
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="../../../public/index.php">Home</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="./coursesCatalog.php">Course Catalog</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#blog">Blog</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#contact">Contact</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="header-btn btn-hover" href="#courses">Get Started</a>
-                                    </li>
-                                </ul>
-                            </div> <!-- navbar collapse -->
-                        </nav> <!-- navbar -->
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- header navbar -->
-    </header>
-    <!--====== HEADER PART ENDS ======-->
+   
+	<header class="header_area">
+		<div id="header_navbar" class="header_navbar">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-xl-12">
+						<nav class="navbar navbar-expand-lg">
+							<a class="navbar-brand" href="#">
+								<img id="logo" src="../../../assets/images/logo.svg" alt="Logo">
+							</a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse"
+								data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+								aria-expanded="false" aria-label="Toggle navigation">
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+								<ul id="nav" class="navbar-nav ml-auto">
+									<li class="nav-item">
+										<a class="page-scroll" href="#home">Home</a>
+									</li>
+									<li class="nav-item">
+										<a class="page-scroll" href="#courses">Courses</a>
+									</li>
+									<li class="nav-item">
+										<a class="page-scroll" href="#categories">Categories</a>
+									</li>
+									<li class="nav-item">
+										<a class="page-scroll" href="#blog">Blog</a>
+									</li>
+									<li class="nav-item">
+										<a class="page-scroll" href="#contact">Contact</a>
+									</li>
+
+									<ul class="navbar-nav ml-auto">
+										<?php if (isset($_SESSION['student_id'])): ?>
+											<li class="nav-item">
+												<a class="header-btn btn-hover"
+													href="/website/app/controllers/logout.php">Log Out</a>
+											</li>
+										<?php else: ?>
+											<li class="nav-item" style="display:flex;gap:10px;">
+												<a class="header-btn btn-hover"
+													href="/website/app/Views/auth/sign-up.php">Sign Up</a>
+												<a class="header-btn btn-hover" href="/website/app/Views/auth/login.php">Log
+													In</a>
+											</li>
+										<?php endif; ?>
+									</ul>
+								</ul>
+							</div> <!-- navbar collapse -->
+						</nav> <!-- navbar -->
+					</div>
+				</div> <!-- row -->
+			</div> <!-- container -->
+		</div> <!-- header navbar -->
+	</header>
 
     <!--====== CATALOG PART START ======-->
     <section id="catalog" class="course-area pt-140 pb-170">
@@ -100,35 +116,28 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
             </div>
 
             <div id="course-list" class="row mb-30">
-				<div class="col-xl-4 col-lg-4 col-md-6">
-					<div class="single-course wow fadeInUp" data-wow-delay=".2s">
-						
-					<?php 
-					// print_r($coursecatalog);
-					foreach ($coursecatalog as $course) {
-						echo "
-							<div class='course-img'>
-							<a href=''>
-								<img src='/website/assets/images/courseBanners/". htmlspecialchars($course['course_img']) . "' alt='course_img'>
-							</a>
-						</div>
-						<div class='course-info'>
-							<h4><a href=''>$course[course_title]</a></h4>
-							
-							</div>
-						</div>
-						
-						
-						";
-					}
-					
-					?>
-				
-					</div>
-				</div>
+				  <!-- Existing Course -->
+                  <?php
+                    // print_r($coursecatalog);
+                    foreach ($coursecatalog as $displaycourse) {
+                        echo "
+                    <div class='col-xl-4 col-lg-4 col-md-6'>
+                        <div class='single-course wow fadeInUp' data-wow-delay='.2s'>
+                            <div class='course-img'>
+                                <a href=''>
+                                    <img src='/website/assets/images/courseBanners/". htmlspecialchars($displaycourse['course_img']) . "' alt='course_picture'>
+                                </a>
+                            </div>
+                            <div class='course-info'>
+                                <h4><a href=''>$displaycourse[course_title]</a></h4>
+                            </div>
+                        </div>
+                    </div>
+               ";
+                    } 
+                    ?>
 
-
-
+               
 
 
 
@@ -204,6 +213,8 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
     <!--====== Bootstrap js ======-->
     <script src="../../../assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
     <script src="../../../assets/js/main.js"></script>
+    <!--====== wow js ======-->
+<script src="../../../assets/js/wow.min.js"></script>
 
     <script>
         function filterCourses() {
@@ -218,9 +229,65 @@ $coursecatalog = $coursecatalog->fetchAllCourses();
                 }
             });
         }
-    </script>
+ 
+
+
+    // Get the navbar
+
+    // for menu scroll 
+    var pageLink = document.querySelectorAll('.page-scroll');
+
+    pageLink.forEach(elem => {
+        elem.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector(elem.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth',
+                offsetTop: 1 - 60,
+            });
+        });
+    });
+
+    // section menu active
+    function onScroll(event) {
+        var sections = document.querySelectorAll('.page-scroll');
+        var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+        for (var i = 0; i < sections.length; i++) {
+            var currLink = sections[i];
+            var val = currLink.getAttribute('href');
+            var refElement = document.querySelector(val);
+            var scrollTopMinus = scrollPos + 73;
+            if (refElement.offsetTop <= scrollTopMinus && (refElement.offsetTop + refElement.offsetHeight > scrollTopMinus)) {
+                document.querySelector('.page-scroll').classList.remove('active');
+                currLink.classList.add('active');
+            } else {
+                currLink.classList.remove('active');
+            }
+        }
+    };
+
+    window.document.addEventListener('scroll', onScroll);
+
+
+    //===== close navbar-collapse when a  clicked
+    let navbarToggler = document.querySelector(".navbar-toggler");
+    var navbarCollapse = document.querySelector(".navbar-collapse");
+
+    document.querySelectorAll(".page-scroll").forEach(e =>
+        e.addEventListener("click", () => {
+            navbarToggler.classList.remove("active");
+            navbarCollapse.classList.remove('show')
+        })
+    );
+    navbarToggler.addEventListener('click', function () {
+        navbarToggler.classList.toggle("active");
+    });
+
+</script>
 </body>
 
 </html>
+
+
 
 
